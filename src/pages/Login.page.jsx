@@ -1,34 +1,8 @@
-<<<<<<< HEAD
-import React from 'react';
-=======
 import { Link } from "react-router-dom"
->>>>>>> eda260c6dedbe90714c394baec290db91c2dc5c9
 
 export default function LoginPage() {
   return (
     <>
-<<<<<<< HEAD
-      <div className="w-2/3 m-auto h-[calc(100vh-96px)] flex  ">
-        <div className="flex flex-col m-auto">
-          <h1 className=" text-center">✏️ LOGIN</h1>
-          <form className="flex  flex-col  items-center h-52 justify-evenly ">
-            <input
-              type="text"
-              placeholder="Type here"
-              className="input input-bordered w-full max-w-xs"
-              required
-            />
-            <input
-              type="password"
-              placeholder="Type here"
-              className="input input-bordered w-full max-w-xs"
-              required
-            />
-            <button className="w-80 h-9 bg-black rounded-lg ">Wide</button>
-          </form>
-        </div>
-      </div>
-=======
     <div className='w-2/3 m-auto h-[calc(100vh-96px)] flex flex-col  '> 
       <div className='flex flex-col m-auto  '>
         <h1 className=' text-center'>✏️ LOGIN</h1>
@@ -45,7 +19,6 @@ export default function LoginPage() {
     
 
    
->>>>>>> eda260c6dedbe90714c394baec290db91c2dc5c9
     </>
   );
 }
