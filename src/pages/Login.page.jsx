@@ -1,10 +1,10 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function LoginPage() {
   return (
     <>
-      <div className="w-2/3 m-auto h-[calc(100vh-96px)] flex  ">
-        <div className="flex flex-col m-auto">
+      <div className="w-2/3 m-auto h-[calc(100vh-96px)] flex flex-col  ">
+        <div className="flex flex-col m-auto  ">
           <h1 className=" text-center">✏️ LOGIN</h1>
           <form className="flex  flex-col  items-center h-52 justify-evenly ">
             <input
@@ -20,6 +20,12 @@ export default function LoginPage() {
               required
             />
             <button className="w-80 h-9 bg-black rounded-lg ">Wide</button>
+            <p className="items-end">
+              Belum punya akun?{' '}
+              <Link to="" className="text-blue-500 underline">
+                Daftar di sini
+              </Link>
+            </p>
           </form>
         </div>
       </div>
