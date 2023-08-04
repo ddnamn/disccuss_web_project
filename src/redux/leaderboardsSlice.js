@@ -1,26 +1,28 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { getLeaderboards } from "../utils/getData";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
   leaderboardsData: [],
 };
 
-const getLeaderboards = getLeaderboards();
+export const fetchLearderboards = createAsyncThunk(
+  "leaderboards/fetchLeaderboards",
+  () => {
+    return axios
+      .get("https://forum-api.dicoding.dev/v1/leaderboards")
+      .then((response) => response.data.data.leaderboards);
+  }
+);
 
 const leaderboardsSlice = createSlice({
   name: "leaderboards",
   initialState,
-  reducers: {},
   extraReducers(builder) {
-    builder.addCase(getLeaderboards.fulfilled, (state, action) => {
+    builder.addCase(fetchLearderboards.fulfilled, (state, action) => {
       state.leaderboardsData = action.payload;
     });
-    builder.addCase(getLeaderboards.rejected, (action) => {
-      console.log("get data rejected");
-      console.log(action.payload);
-    });
+    builder.addCase(fetchLearderboards.rejected);
   },
 });
 
-module.exports = leaderboardsSlice.reducer;
-// module.exports.action = leaderboardsSlice.actions
+export default leaderboardsSlice.reducer;

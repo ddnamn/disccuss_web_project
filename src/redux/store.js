@@ -4,9 +4,9 @@ import leaderboardsReducer from "./leaderboardsSlice";
 
 const Store = configureStore({
   reducer: {
-    threadState: threadsReducer,
     leaderboards: leaderboardsReducer,
+    threads: threadsReducer,
   },
 });
 
-module.exports = Store;
+export default Store;
