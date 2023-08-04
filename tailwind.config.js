@@ -8,6 +8,9 @@ export default {
         accent: '#2d394b',
         transcript: '#afbfcb',
       },
+      fontFamily: {
+        quicksand: ['Quicksand', 'sans-serif'],
+      },
     },
   },
   plugins: [require('daisyui')],
