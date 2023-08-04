@@ -7,7 +7,7 @@ import Navbar from "./components/Navbar"
 
 
 function App() {
-  // const leaderboardsData = useSelector((store)=>store.leaderboards.leaderboardsData)
+  // const listOfLeaderboard = useSelector((store)=>store.leaderboards.leaderboardsData)
   return (
     <>
      <BrowserRouter>
@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path='/' element={<ThreadPage/>}/>
         <Route path='leaderboards' element={<LeaderboardsPage/>}/>
-        {/* <Route path='leaderboards' element={<LeaderboardsPage setOfLeaderboards={leaderboardsData}/>}/> */}
+        {/* <Route path='leaderboards' element={<LeaderboardsPage setOfLeaderboards={listOfLeaderboard}/>}/> */}
         <Route path='login' element={< LoginPage/>}/>
       </Routes>
      </BrowserRouter>
