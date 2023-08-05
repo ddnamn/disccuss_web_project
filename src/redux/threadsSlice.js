@@ -5,17 +5,10 @@ const initialState = {
   threadsData: [],
 };
 
-export const fetchThreads = createAsyncThunk(
-  "threads/fetchThreads",
-  async () => {
-    const url = "https://forum-api.dicoding.dev/v1/threads";
-    try {
-      const response = await axios.get(url);
-      return console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+export const fetchThreads = createAsyncThunk("threads/fetchThreads", () =>
+  axios
+    .get("https://forum-api.dicoding.dev/v1/threads")
+    .then(response.data.data.threads)
 );
 
 const threadSlice = createSlice({

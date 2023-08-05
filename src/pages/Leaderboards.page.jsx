@@ -25,7 +25,7 @@ export default function LeaderboardsPage() {
         </div>
         
         
-          {listOfLeaderboard.map(ranking=><RankingBoard data={ranking}/>)}
+         {listOfLeaderboard.map(ranking=><RankingBoard data={ranking}/>)}
        
       </div>
     </>
