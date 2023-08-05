@@ -1,12 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import threadsReducer from "./threadsSlice";
-import leaderboardsReducer from "./leaderboardsSlice";
-
+import threadsReducer from "./reducer/threadsSlice";
+import leaderboardsReducer from "./reducer/leaderboardsSlice";
+import loginReducer from "./reducer/loginSlice";
 const Store = configureStore({
   reducer: {
-    threadState: threadsReducer,
     leaderboards: leaderboardsReducer,
+    threads: threadsReducer,
+    token: loginReducer,
   },
 });
 
-module.exports = Store;
+export default Store;

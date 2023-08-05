@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { getLeaderboards, getThreads } from '../utils/getData';
 import { useDispatch } from 'react-redux';
 import CardList from '../components/CardList';
 
