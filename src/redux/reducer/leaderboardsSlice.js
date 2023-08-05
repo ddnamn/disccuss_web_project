@@ -7,11 +7,10 @@ const initialState = {
 
 export const fetchLearderboards = createAsyncThunk(
   "leaderboards/fetchLeaderboards",
-  () => {
-    return axios
+  () =>
+    axios
       .get("https://forum-api.dicoding.dev/v1/leaderboards")
-      .then((response) => response.data.data.leaderboards);
-  }
+      .then((response) => response.data.data.leaderboards)
 );
 
 const leaderboardsSlice = createSlice({

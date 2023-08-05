@@ -1,7 +1,7 @@
 import { useSelector,useDispatch } from "react-redux"
 
 import { useEffect } from "react"
-import{fetchLearderboards} from "../redux/leaderboardsSlice"
+import{fetchLearderboards} from "../redux/reducer/leaderboardsSlice"
 import RankingBoard from "../components/RankingBoard"
 
 export default function LeaderboardsPage() {
@@ -15,7 +15,7 @@ export default function LeaderboardsPage() {
   return (
     <>
      <div className='w-2/3 m-auto '>
-        <div className=' text-xl flex  font-bold justify-center'>LeaderBoard Page</div>
+        <div className=' text-xl flex  font-bold justify-center'>LeaderBoard</div>
 
         <div>
           <div className='flex justify-around '>
@@ -25,7 +25,7 @@ export default function LeaderboardsPage() {
         </div>
         
         
-          {listOfLeaderboard.map(ranking=><RankingBoard data={ranking}/>)}
+         {listOfLeaderboard.map(ranking=><RankingBoard data={ranking}/>)}
        
       </div>
     </>
