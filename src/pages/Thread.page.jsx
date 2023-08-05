@@ -5,6 +5,12 @@ import CardList from '../components/CardList';
 import { threads } from '../utils/local-data'; // data-local (arrayOfObject)
 
 export default function ThreadPage() {
+
+  const createDisccussHandler = ()=>{
+    console.log('open createDisccuss')
+  }
+
+
   return (
     <>
       <div className="threads__container w-2/3 m-auto bg-primary text-transcript py-[1rem]">
@@ -26,6 +32,11 @@ export default function ThreadPage() {
         </header>
         {/* {LIST} */}
         <CardList threads={threads} />
+      </div>
+
+      <div className='z-10 absolute bg-green-300 right-0' onClick={createDisccussHandler}>
+        ➕ create Disccuss
+        
       </div>
     </>
   );
