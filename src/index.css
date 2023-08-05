@@ -6,3 +6,12 @@
   font-family: 'Quicksand';
   src: url('/src/assets/font/Quicksand/Quicksand-VariableFont_wght.ttf');
 }
+
+.card__footer button:hover span {
+  color: #cedae3;
+}
+
+.card__footer button:hover i {
+  color: #cedae3;
+  transform: scale(1.15);
+}
