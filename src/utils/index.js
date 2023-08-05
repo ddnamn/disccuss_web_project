@@ -1,5 +1,4 @@
 const MONTH_NAMES = [
-<<<<<<< HEAD
   'January',
   'February',
   'March',
@@ -12,20 +11,6 @@ const MONTH_NAMES = [
   'October',
   'November',
   'December',
-=======
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
->>>>>>> 8d80eccd9d198e47889d163882acedefd7a4a6b8
 ];
 
 function getFormattedDate(date, prefomattedDate = false, hideYear = false) {
@@ -63,11 +48,7 @@ function timeAgo(dateParam) {
     return null;
   }
 
-<<<<<<< HEAD
   const date = typeof dateParam === 'object' ? dateParam : new Date(dateParam);
-=======
-  const date = typeof dateParam === "object" ? dateParam : new Date(dateParam);
->>>>>>> 8d80eccd9d198e47889d163882acedefd7a4a6b8
   const DAY_IN_MS = 86400000; // 24 * 60 * 60 * 1000
   const today = new Date();
   const yesterday = new Date(today - DAY_IN_MS);
@@ -78,7 +59,6 @@ function timeAgo(dateParam) {
   const isThisYear = today.getFullYear() === date.getFullYear();
 
   if (seconds < 5) {
-<<<<<<< HEAD
     return 'now';
   } else if (seconds < 60) {
     return `${seconds} seconds ago`;
@@ -90,19 +70,6 @@ function timeAgo(dateParam) {
     return getFormattedDate(date, 'Today'); // Today at 10:20
   } else if (isYesterday) {
     return getFormattedDate(date, 'Yesterday'); // Yesterday at 10:20
-=======
-    return "now";
-  } else if (seconds < 60) {
-    return `${seconds} seconds ago`;
-  } else if (seconds < 90) {
-    return "about a minute ago";
-  } else if (minutes < 60) {
-    return `${minutes} minutes ago`;
-  } else if (isToday) {
-    return getFormattedDate(date, "Today"); // Today at 10:20
-  } else if (isYesterday) {
-    return getFormattedDate(date, "Yesterday"); // Yesterday at 10:20
->>>>>>> 8d80eccd9d198e47889d163882acedefd7a4a6b8
   } else if (isThisYear) {
     return getFormattedDate(date, false, true); // 10. January at 10:20
   }
