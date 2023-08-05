@@ -1,8 +1,7 @@
 import {  useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom"
-import { fetchToken } from "../redux/loginSlice";
-
+import { fetchToken } from "../redux/reducer/loginSlice";
 export default function LoginPage() {
   const [email,setEmail] = useState()
   const [password,setPassword]=useState()

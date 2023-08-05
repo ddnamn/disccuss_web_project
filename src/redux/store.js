@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import threadsReducer from "./threadsSlice";
-import leaderboardsReducer from "./leaderboardsSlice";
-import loginReducer from "./loginSlice";
+import threadsReducer from "./reducer/threadsSlice";
+import leaderboardsReducer from "./reducer/leaderboardsSlice";
+import loginReducer from "./reducer/loginSlice";
 const Store = configureStore({
   reducer: {
     leaderboards: leaderboardsReducer,
