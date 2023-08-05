@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchThreads } from '../redux/threadsSlice';
+import { fetchThreads } from '../redux/reducer/threadsSlice';
 import { useEffect } from 'react';
 
 export default function ThreadPage() {
