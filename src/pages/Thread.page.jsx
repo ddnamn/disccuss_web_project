@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import CardList from '../components/CardList';
-
+import { TbPencilPlus, TbPlus } from 'react-icons/tb';
 import { threads } from '../utils/local-data'; // data-local (arrayOfObject)
 
 export default function ThreadPage() {
@@ -26,6 +26,9 @@ export default function ThreadPage() {
         </header>
         {/* {LIST} */}
         <CardList threads={threads} />
+        <button className="add-button fixed bottom-[3rem] right-[3rem] flex justify-center items-center bg-transcript p-1 rounded-[30%] hover:scale-[1.1] duration-[0.2s] ease">
+          <TbPencilPlus className="text-[2.25rem] text-primary" id="pencil" />
+        </button>
       </div>
     </>
   );

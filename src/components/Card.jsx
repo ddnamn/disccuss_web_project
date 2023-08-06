@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { FaUserCircle, FaRegThumbsUp, FaRegThumbsDown, FaRegCommentDots } from 'react-icons/fa';
 import timeAgo from '../utils/index';
+import { Link } from 'react-router-dom';
 
 export default function Card({
+  id,
   title,
   body,
   category,
@@ -24,9 +26,12 @@ export default function Card({
       </header>
       {/* body card */}
       <main className="card__body py-[10px]">
-        <a href="#" className="card__title text-[1.15em] font-[700] no-underline text-inherit">
+        <Link
+          to={`/thread/${id}`}
+          className="card__title text-[1.15em] font-[700] no-underline text-inherit"
+        >
           {title}
-        </a>
+        </Link>
         <p className="card__desc pt-[10px] font-[0.95em]">{body}</p>
         <div className="card__category-container flex gap-[8px] mt-[20px]">
           <span className="bg-transcript text-primary font-[700] text-[0.75em] rounded-[3.5px] py-[2px] px-[5.5px] border-solid border-transcript ">
