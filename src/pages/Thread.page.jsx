@@ -5,15 +5,13 @@ import { TbPencilPlus, TbPlus } from 'react-icons/tb';
 import { threads } from '../utils/local-data'; // data-local (arrayOfObject)
 
 export default function ThreadPage() {
-
-  const createDisccussHandler = ()=>{
-    console.log('open createDisccuss')
-  }
-
+  const createDisccussHandler = () => {
+    console.log('open createDisccuss');
+  };
 
   return (
     <>
-      <div className="threads__container max-w-[700px] w-[100%] m-auto bg-primary text-transcript py-[1rem]">
+      <div className="threads__container max-w-[800px] w-[100%] m-auto bg-primary text-transcript py-[1rem]">
         {/* HEADER */}
         <header className="threads__header p-[10px] font-medium">
           <h2 className="text-sm mb-[8px]">Kategori Popular</h2>
@@ -37,9 +35,8 @@ export default function ThreadPage() {
         </button>
       </div>
 
-      <div className='z-10 absolute bg-green-300 right-0' onClick={createDisccussHandler}>
+      <div className="z-10 absolute bg-green-300 right-0" onClick={createDisccussHandler}>
         ➕ create Disccuss
-        
       </div>
     </>
   );
