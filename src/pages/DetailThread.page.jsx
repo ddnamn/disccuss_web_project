@@ -34,7 +34,7 @@ export default function DetailThreadPage() {
   return (
     <div id="wrapper-page" className="max-w-[800px] w-[100%] m-auto">
       <div className="cardd w-full p-[15px] text-[1.2rem] font-normal mt-5">
-        {/* header card */}
+        {/* DETAIL SIDE */}
         <header className="card__header flex justify-between items-center">
           <div className="card__profile flex items-center">
             <FaUserCircle className="text-[1.5em] text-inherit" />
@@ -44,7 +44,6 @@ export default function DetailThreadPage() {
           </div>
           <span className="card__created text-[0.75em]">Yesterday</span>
         </header>
-        {/* body card */}
         <main className="card__body py-[10px]">
           <h1 className="card__title text-[1.5em] font-[600] no-underline text-inherit">
             Tuhan Mengapa Aku Berbeda{' '}
@@ -79,7 +78,6 @@ export default function DetailThreadPage() {
             </span>
           </div>
         </main>
-        {/* footer card */}
         <footer className="card__footer pt-[8px] pl-[2px] flex gap-[20px]">
           <button className="flex items-center gap-[4px] text-inherit border-none bg-transparent cursor-pointer">
             <i className="text-[.9em] transition ease duration-[100ms]">
@@ -121,6 +119,7 @@ export default function DetailThreadPage() {
             Kirim
           </button>
         </div>
+        {/* COMMENT SIDE */}
         <div id="comments-container" className="mt-5 font-semibold">
           <p>Komentar (1)</p>
           <div

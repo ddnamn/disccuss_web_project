@@ -34,10 +34,6 @@ export default function ThreadPage() {
           <TbPencilPlus className="text-[2.25rem] text-primary" id="pencil" />
         </button>
       </div>
-
-      <div className="z-10 absolute bg-green-300 right-0" onClick={createDisccussHandler}>
-        ➕ create Disccuss
-      </div>
     </>
   );
 }
