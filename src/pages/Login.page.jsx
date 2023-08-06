@@ -16,7 +16,7 @@ export default function LoginPage() {
     };
     e.preventDefault();
     dispatch(fetchToken(data));
-    navigate('/');
+    navigate('/',{replace:true});
   };
 
   return (

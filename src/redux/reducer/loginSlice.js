@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
   loading: false,
@@ -6,20 +6,14 @@ const initialState = {
   error: null,
 };
 
-export const fetchToken = createAsyncThunk("login/fetchToken", async (data) => {
-  try {
-    await axios.post("https://forum-api.dicoding.dev/v1/login", data);
-    return console.log(response);
-  } catch (error) {
-    throw "Invalid username or password";
-  }
-  // return axios
-  //   .post("https://forum-api.dicoding.dev/v1/login", data)
-  //   .then((response) => console.log(response.data.data.token));
+export const fetchToken = createAsyncThunk('login/fetchToken', async (data) => {
+  return axios
+    .post('https://forum-api.dicoding.dev/v1/login', { data })
+    .then((response) => console.log(response.data.data.token));
 });
 
 const loginSlice = createSlice({
-  name: "login",
+  name: 'login',
   initialState,
   extraReducers(builder) {
     builder.addCase(fetchToken.pending, (state) => {
