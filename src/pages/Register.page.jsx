@@ -1,7 +1,6 @@
 import  {  useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {fetchRegisterData} from '../redux/reducer/registerSlice'
-import { useNavigate } from 'react-router-dom'
 
 
 export default function RegisterPage() {
@@ -9,16 +8,14 @@ export default function RegisterPage() {
   const [email,setEmail] = useState("")
   const [password,setPassword] = useState("")
 
+  // const isRegistered = useSelector(store=>store.register.status)
+
   // const registerInfo=  useSelector(store=>store.register)
   const dispatch=useDispatch()
-  const navigate=useNavigate()
-
 
   const registerButtonHandler= (e)=>{
     e.preventDefault(),
-    
-    dispatch(fetchRegisterData(JSON.stringify( {name,email,password})))
-    navigate("/")
+    dispatch(fetchRegisterData(JSON.stringify( {name,email,password}))) 
   }
 
   return (
