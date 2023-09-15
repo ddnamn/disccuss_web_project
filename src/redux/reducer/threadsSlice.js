@@ -1,18 +1,18 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const initialState = {
   threadsData: [],
 };
 
-export const fetchThreads = createAsyncThunk("threads/fetchThreads", () => {
+export const fetchThreads = createAsyncThunk('threads/fetchThreads', () => {
   return axios
-    .get("https://forum-api.dicoding.dev/v1/threads")
+    .get('https://forum-api.dicoding.dev/v1/threads')
     .then((res) => res.data.data.threads);
 });
 
 const threadSlice = createSlice({
-  name: "threads",
+  name: 'threads',
   initialState,
   reducers: {},
   extraReducers: (builder) => {

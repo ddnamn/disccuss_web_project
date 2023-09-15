@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 export default function Navbar() {
-  const isRegistered = useSelector(store=>store.register.data)
+  const isRegistered = useSelector((store) => store.register.data);
 
   return (
     <>
@@ -52,15 +52,15 @@ export default function Navbar() {
               <Link to="/leaderboards">LeaderBoards</Link>
             </li>
 
-
-            {
-                isRegistered.length?<li>
+            {isRegistered.length ? (
+              <li>
                 <Link to="/login">LogOut</Link>
-              </li>:<li>
-              <Link to="/login">LogIn</Link>
-            </li>
-            }
-            
+              </li>
+            ) : (
+              <li>
+                <Link to="/login">LogIn</Link>
+              </li>
+            )}
           </ul>
         </details>
       </header>

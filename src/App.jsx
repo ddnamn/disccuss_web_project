@@ -15,10 +15,10 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<ThreadPage />} />
-          <Route path="leaderboards" element={<LeaderboardsPage />} />
+          <Route path="/leaderboards" element={<LeaderboardsPage />} />
           {/* <Route path='leaderboards' element={<LeaderboardsPage setOfLeaderboards={listOfLeaderboard}/>}/> */}
-          <Route path="login" element={<LoginPage />} />
-          <Route path="register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
           <Route path="/thread/:id" element={<DetailThreadPage />} />
         </Routes>
       </BrowserRouter>

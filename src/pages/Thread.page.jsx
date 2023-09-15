@@ -4,25 +4,19 @@ import CardList from '../components/CardList';
 
 import { TbPencilPlus, TbPlus } from 'react-icons/tb';
 
-
-
 import { fetchThreads } from '../redux/reducer/threadsSlice';
 
-
-
 export default function ThreadPage() {
+  const banchOfThreads = useSelector((store) => store.threads.threadsData);
+  const dispatch = useDispatch();
 
-  const banchOfThreads= useSelector(store=>store.threads.threadsData)
+  useEffect(() => {
+    dispatch(fetchThreads());
+  }, []);
 
-  const dispatch = useDispatch()
-  useEffect(()=>{
-    dispatch(fetchThreads())
-  } ,[])
-
-
-    const createDisccussHandler = ()=>{
-      console.log('open createDisccuss')
-    }
+  const createDisccussHandler = () => {
+    console.log('open createDisccuss');
+  };
 
   // console.log(banchOfThreads)
   return (
@@ -39,16 +33,12 @@ export default function ThreadPage() {
           <h1 className="text-[1.7rem] font-bold mt-[20px]">Diskusi tersedia</h1>
         </header>
         {/* {LIST} */}
-        <CardList threads={banchOfThreads}/>
+        <CardList threads={banchOfThreads} />
 
         <button className="add-button fixed bottom-[3rem] right-[3rem] flex justify-center items-center bg-transcript p-1 rounded-[30%] hover:scale-[1.1] duration-[0.2s] ease">
           <TbPencilPlus className="text-[2.25rem] text-primary" id="pencil" />
         </button>
       </div>
-
-      
-      
-
     </>
   );
 }
