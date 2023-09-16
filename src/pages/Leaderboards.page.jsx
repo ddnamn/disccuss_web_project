@@ -6,7 +6,7 @@ import RankingBoard from "../components/RankingBoard"
 
 export default function LeaderboardsPage() {
  
-  const listOfLeaderboard = useSelector((store)=>store.leaderboards.leaderboardsData)
+  // const listOfLeaderboard = useSelector((store)=>store.leaderboards.leaderboardsData)
   const dispatch = useDispatch()
   useEffect(()=>{
     dispatch(fetchLearderboards())
@@ -24,8 +24,10 @@ export default function LeaderboardsPage() {
           </div>
         </div>
         
+
+        <RankingBoard/>
         
-         {listOfLeaderboard.map(ranking=><RankingBoard data={ranking}/>)}
+         {/* {listOfLeaderboard.map(ranking=><RankingBoard data={ranking}/>)} */}
        
       </div>
     </>

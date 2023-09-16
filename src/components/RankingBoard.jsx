@@ -1,8 +1,13 @@
-import React from 'react'
+import { useSelector } from "react-redux"
+
 
 export default function RankingBoard({data}) {
+  const listOfLeaderboard = useSelector((store)=>store.leaderboards.leaderboardsData)
+
   return (
    <ul>
+      {/* {listOfLeaderboard.map(ranking=><RankingBoard data={ranking}/>)} */}
+
       <li  className="flex justify-around items-center p-2">
          
          <div className="flex items-center flex-1 justify-start ">
