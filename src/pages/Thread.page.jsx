@@ -1,15 +1,25 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import CardList from '../components/CardList';
+import { useDispatch,useSelector } from 'react-redux';
+import Thread from '../components/Thread';
 
 import { threads } from '../utils/local-data'; // data-local (arrayOfObject)
+import {fetchThreads} from '../redux/reducer/threadsSlice'
+
+
 
 export default function ThreadPage() {
 
-  const createDisccussHandler = ()=>{
-    console.log('open createDisccuss')
-  }
+  // const createDisccussHandler = ()=>{
+  //   console.log('open createDisccuss')
+  // }
+ 
+  const bunchOfThread = useSelector((store)=>store.threads.threadsData)
 
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    dispatch(fetchThreads())
+  },[])
 
   return (
     <>
@@ -31,13 +41,15 @@ export default function ThreadPage() {
           <h1 className="text-[1.7rem] font-semibold mt-[20px]">Diskusi tersedia</h1>
         </header>
         {/* {LIST} */}
-        <CardList threads={threads} />
+        {
+          bunchOfThread.map(thread=><Thread key={thread.id} {...thread} />)
+        }
+        {/* <CardList threads={threads} /> */}
       </div>
 
-      <div className='z-10 absolute bg-green-300 right-0' onClick={createDisccussHandler}>
-        ➕ create Disccuss
-        
-      </div>
+      {/* <div className='z-10 absolute bg-green-300 right-0' onClick={createDisccussHandler}>
+        ➕ create Disccuss 
+      </div> */}
     </>
   );
 }

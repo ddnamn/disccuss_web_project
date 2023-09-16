@@ -18,7 +18,6 @@ const threadSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchThreads.fulfilled, (state, action) => {
       state.threadsData = action.payload;
-      console.log(action.payload);
     }),
       builder.addCase(fetchThreads.rejected);
   },

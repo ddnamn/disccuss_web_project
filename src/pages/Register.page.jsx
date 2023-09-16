@@ -48,7 +48,7 @@ export default function RegisterPage() {
               />
 
               {
-                name&&password.length>= 6 ?<button className="w-80 h-9 bg-black rounded-lg ">register</button>:password.length===0?<p className='text-red-500'>please fil the field</p>:<p className='text-red-500'>Password must be at least 6 characters</p>
+                name&&password.length>= 6 ?<button className="w-80 h-9 bg-black rounded-lg ">register</button>:password.length===0?<p className='text-red-500'>please fil the field</p>:<p className='text-red-500 font-bold'>Password must be at least 6 characters</p>
               }
                 
               
