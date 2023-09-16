@@ -3,7 +3,7 @@ import React from 'react'
 export default function RankingBoard({data}) {
   return (
    <ul>
-      <li key={data.user.id||''} className="flex justify-around items-center p-2">
+      <li  className="flex justify-around items-center p-2">
          
          <div className="flex items-center flex-1 justify-start ">
                <div className="avatar mr-2">

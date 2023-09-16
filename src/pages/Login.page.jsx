@@ -1,24 +1,23 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate,Link } from 'react-router-dom';
 import {fetchToken} from '../redux/reducer/loginSlice'
 
 export default function LoginPage() {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate(); // navigasi 
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+
+  const dispatch = useDispatch(); //redux for store data
 
   const submitHandler = (e) => {
-    e.preventDefault();
-    const data = {
-      email,password,
-    };
-    dispatch(fetchToken(JSON.stringify(data)));
-    console.log(JSON.stringify(data))
-    // navigate('/',{replace:true});
+    e.preventDefault(),
+    dispatch(fetchToken(JSON.stringify( {email,password}))) 
+    navigate('/',{replace:true})
   };
+ 
+  
 
   return (
     <>
@@ -40,7 +39,11 @@ export default function LoginPage() {
               required
               onChange={e=>setPassword(e.target.value)}
             />
-            <button className="w-80 h-9 bg-black rounded-lg ">Login</button>
+            
+            <button  className="w-80 h-9 bg-black rounded-lg flex justify-center items-center">
+              Login
+            </button>
+  
           </form>
 
 

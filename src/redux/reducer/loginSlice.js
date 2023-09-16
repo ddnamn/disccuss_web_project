@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
   loading: false,
@@ -8,8 +9,10 @@ const initialState = {
 
 export const fetchToken = createAsyncThunk("login/fetchToken", (data) =>
   axios
-    .post("https://forum-api.dicoding.dev/v1/login", data)
-    .then((res) => console.log(res.data.data.token))
+    .post("https://forum-api.dicoding.dev/v1/login", data, {
+      headers: { "Content-Type": "application/json" },
+    })
+    .then((res) => res.data.data.token)
 );
 
 const loginSlice = createSlice({
@@ -23,9 +26,9 @@ const loginSlice = createSlice({
     }),
       builder.addCase(fetchToken.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.token = payload.payload;
+        state.token = payload;
         state.error = null;
-        console.log("login success");
+        alert("login success");
       }),
       builder.addCase(fetchToken.rejected, (state, action) => {
         state.loading = false;
