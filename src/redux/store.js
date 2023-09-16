@@ -1,8 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit';
-import threadsReducer from './reducer/threadsSlice';
-import leaderboardsReducer from './reducer/leaderboardsSlice';
-import loginReducer from './reducer/loginSlice';
-import registerReducer from '../redux/reducer/registerSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import threadsReducer from "./reducer/threadsSlice";
+import leaderboardsReducer from "./reducer/leaderboardsSlice";
+import loginReducer from "./reducer/loginSlice";
+import registerReducer from "../redux/reducer/registerSlice";
+import authUserReducer from "../redux/reducer/authUserSlice";
 
 const Store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const Store = configureStore({
     threads: threadsReducer,
     token: loginReducer,
     register: registerReducer,
+    authUser: authUserReducer,
   },
 });
 

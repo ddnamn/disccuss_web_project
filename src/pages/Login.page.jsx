@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
-import { fetchToken } from '../redux/reducer/loginSlice';
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
+import { fetchToken } from "../redux/reducer/loginSlice";
+import { login } from "../redux/reducer/authUserSlice";
 
 export default function LoginPage() {
   const [email, setEmail] = useState();
@@ -16,9 +17,8 @@ export default function LoginPage() {
       email,
       password,
     };
-    dispatch(fetchToken(JSON.stringify(data)));
-    console.log(JSON.stringify(data));
-    // navigate('/',{replace:true});
+    dispatch(login(data));
+    navigate("/");
   };
 
   return (
@@ -48,7 +48,7 @@ export default function LoginPage() {
           </form>
 
           <p className="items-end text-center">
-            Belum punya akun?{' '}
+            Belum punya akun?{" "}
             <Link to="/register" className="text-blue-500 underline">
               Daftar di sini
             </Link>

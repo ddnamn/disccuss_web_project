@@ -1,22 +1,22 @@
-import axios from 'axios';
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from "axios";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
-  loading: 'idle', // "pending" "fulfilled" "rejected"
+  loading: "idle", // "pending" "fulfilled" "rejected"
   token: null,
   user: null,
   error: false,
 };
 
 // register
-const register = createAsyncThunk('authUser/register', async (data, thunkAPI) => {
+const register = createAsyncThunk("authUser/register", async (data, thunkAPI) => {
   try {
     const response = await axios.post(
-      'https://forum-api.dicoding.dev/v1/register',
+      "https://forum-api.dicoding.dev/v1/register",
       JSON.stringify(data),
       {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
@@ -29,14 +29,14 @@ const register = createAsyncThunk('authUser/register', async (data, thunkAPI) =>
 });
 
 // login
-const login = createAsyncThunk('authUser/login', async (data, thunkAPI) => {
+const login = createAsyncThunk("authUser/login", async (data, thunkAPI) => {
   try {
     const response = await axios.post(
-      'https://forum-api.dicoding.dev/v1/login',
+      "https://forum-api.dicoding.dev/v1/login",
       JSON.stringify(data),
       {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
@@ -49,9 +49,9 @@ const login = createAsyncThunk('authUser/login', async (data, thunkAPI) => {
 });
 
 // getProfile
-const getProfile = createAsyncThunk('authUser/getProfile', async (data) => {
+const getProfile = createAsyncThunk("authUser/getProfile", async (data) => {
   try {
-    const response = await axios.get('https://forum-api.dicoding.dev/v1/users/me', {
+    const response = await axios.get("https://forum-api.dicoding.dev/v1/users/me", {
       headers: {
         Authorization: `Bearer ${data}`,
       },
@@ -64,7 +64,7 @@ const getProfile = createAsyncThunk('authUser/getProfile', async (data) => {
 });
 
 const authUserSlice = createSlice({
-  name: 'authUser',
+  name: "authUser",
   initialState,
   reducers: {
     logout: () => {
@@ -74,43 +74,45 @@ const authUserSlice = createSlice({
   extraReducers: (builder) => {
     // authUser/register
     builder.addCase(register.pending, (state) => {
-      state.loading = 'pending';
+      state.loading = "pending";
     });
     builder.addCase(register.fulfilled, (state, action) => {
-      state.loading = 'fulfilled';
+      state.loading = "fulfilled";
       state.error = false;
       state.user = action.payload;
+      alert("register success !");
     });
     builder.addCase(register.rejected, (state, action) => {
-      state.loading = 'rejected';
+      state.loading = "rejected";
       state.error = true;
       alert(action.payload);
     });
     // authUser/login
     builder.addCase(login.pending, (state) => {
-      state.loading = 'pending';
+      state.loading = "pending";
     });
     builder.addCase(login.fulfilled, (state, action) => {
-      state.loading = 'fulfilled';
+      state.loading = "fulfilled";
       state.error = false;
       state.token = action.payload;
     });
     builder.addCase(login.rejected, (state, action) => {
-      state.loading = 'rejected';
+      state.loading = "rejected";
       state.error = true;
       alert(action.payload);
     });
     // authUser/getProfile
     builder.addCase(getProfile.pending, (state) => {
-      state.loading = 'pending';
+      state.loading = "pending";
     });
     builder.addCase(getProfile.fulfilled, (state, action) => {
-      state.loading = 'fulfilled';
+      state.loading = "fulfilled";
       state.error = false;
       state.user = action.payload;
+      alert("login success !");
     });
     builder.addCase(getProfile.rejected, (state, action) => {
-      state.loading = 'rejected';
+      state.loading = "rejected";
       state.error = true;
       alert(action.payload);
     });
