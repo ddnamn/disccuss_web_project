@@ -1,24 +1,25 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const initialState = {
-  status: "",
-  message: "",
+  status: '',
+  message: '',
   data: [],
 };
 
-export const fetchRegisterData = createAsyncThunk(
-  "register/fetchRegisterData",
-  (data) =>
-    axios
-      .post("https://forum-api.dicoding.dev/v1/register", data, {
-        headers: { "Content-Type": "application/json" },
-      })
-      .then((res) => res.data)
+export const fetchRegisterData = createAsyncThunk('register/fetchRegisterData', (data) =>
+  axios
+    .post('https://forum-api.dicoding.dev/v1/register', data, {
+      headers: { 'Content-Type': 'application/json' },
+    })
+    .then((res) => {
+      console.log(res.data);
+      return res.data;
+    })
 );
 
 const registerSlice = createSlice({
-  name: "register",
+  name: 'register',
   initialState,
   extraReducers(builder) {
     builder.addCase(fetchRegisterData.pending);
@@ -26,11 +27,9 @@ const registerSlice = createSlice({
       (state.status = payload.status),
         (state.message = payload.message),
         (state.data = payload.data.user),
-        alert("register success");
+        alert('register success');
     });
-    builder.addCase(fetchRegisterData.rejected, ({ payload }) =>
-      alert(payload.message)
-    );
+    builder.addCase(fetchRegisterData.rejected, ({ payload }) => alert(payload.message));
   },
 });
 
