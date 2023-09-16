@@ -1,23 +1,21 @@
 
+import RankingBoard from "../components/RankingBoard"
+
+
 export default function LeaderboardsPage() {
-  
+
   return (
     <>
-     <div className='w-2/3 m-auto bg-slate-50'>
-        <div className='text-black text-xl'>LeaderBoard Page</div>
-        <h2>Klasemen Pengguna Aktif</h2><hr />
+     <div className='w-2/3 m-auto '>
+        <div className=' text-xl flex  font-bold justify-center'>LeaderBoard</div>
         <div>
-          <div className='flex justify-evenly'>
-            <div className='text-black'>Pengguna</div>
-            <div className='text-black'>Skor</div>
+          <div className='flex justify-around '>
+            <div className='box-content  font-bold  flex-1 flex justify-center ' >Pengguna</div>
+            <div className='box-content   font-bold  flex-1 flex justify-center -mr-8'>Skor</div>
           </div>
         </div>
-        
-        <div>
-          
-        </div>
-
-
+          <RankingBoard/>
+               
       </div>
     </>
   )

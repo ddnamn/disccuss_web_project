@@ -1,15 +1,6 @@
-import { createContext, useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
-const checkAuth = createContext();
-
-export default function Auth() {
-  const [authentication, setAuthentication] = useState();
-
-  useEffect(() => {});
-
-  const login = () => {};
-
-  const logOut = () => {};
-
-  return <></>;
+export default function AuthChacker({ children }) {
+  const check = useSelector((store) => store.register);
+  return <>{children}</>;
 }

@@ -1,6 +1,10 @@
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 export default function Navbar() {
+  const isLogin = useSelector(store=>store.token.token)
+
+
   return (
     <>
       <header className="navbar bg-base-300 lg:justify-center justify-around h-24">
@@ -48,9 +52,16 @@ export default function Navbar() {
             <li>
               <Link to="/leaderboards">LeaderBoards</Link>
             </li>
-            <li>
-              <Link to="/login">Login</Link>
+
+
+            {
+              isLogin?.length?<li>
+                <Link to="/login">LogOut</Link>
+              </li>:<li>
+              <Link to="/login">LogIn</Link>
             </li>
+            }
+            
           </ul>
         </details>
       </header>
