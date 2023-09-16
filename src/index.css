@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Quicksand';
-  src: url('/src/assets/font/Quicksand/Quicksand-VariableFont_wght.ttf');
+  font-family: "Quicksand";
+  src: url("/src/assets/font/Quicksand/Quicksand-VariableFont_wght.ttf");
 }
