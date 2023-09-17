@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import CardList from "../components/CardList";
 import { TbPencilPlus, TbPlus } from "react-icons/tb";
 
-import { fetchThreads } from "../redux/reducer/threadsSlice";
+import { fetchThreads, upVoteAsync } from "../redux/reducer/threadsSlice";
 import { fetchUsers } from "../redux/reducer/usersSlice";
 import { setCategories } from "../redux/reducer/categoriesSlice";
 
 export default function ThreadPage() {
   const dispatch = useDispatch();
-  const authUser = useSelector((states) => states.register.data) || [];
+  const token = useSelector((states) => states.token.token) || null;
+  const authUser = useSelector((states) => states.register.data) || null;
   const users = useSelector((states) => states.users.entities) || [];
   const threads = useSelector((states) => states.threads.entities) || [];
   const categories = useSelector((state) => state.categories.entities) || [];
@@ -25,11 +26,8 @@ export default function ThreadPage() {
   useEffect(() => {
     dispatch(fetchThreads());
     dispatch(fetchUsers());
-  }, []);
-
-  useEffect(() => {
     dispatch(setCategories(threads));
-  }, [threads]);
+  }, []);
 
   const createDisccussHandler = () => {
     alert("open createDisccuss.page");
@@ -37,6 +35,18 @@ export default function ThreadPage() {
 
   const onCategoryHandler = ({ target }) => {
     setCategory(target.innerText);
+  };
+
+  const onVoteUpHandler = (threadId) => {
+    // Dengan anggapan authUser & token initial-nya adalah null
+    if (authUser && token) return dispatch(upVoteAsync(threadId));
+
+    return alert("Need to Login !");
+  };
+
+  const onVoteDownHandler = (threadId) => {
+    if (!authUser) return alert("Need to Login !");
+    // dispatch(downVoteAsync(threadId))
   };
 
   return (
@@ -59,7 +69,7 @@ export default function ThreadPage() {
           <h1 className="text-[1.7rem] font-bold mt-[20px]">Diskusi tersedia</h1>
         </header>
         {/* {LIST} */}
-        <CardList threads={threadList.filter((t) => t.category.includes(category))} />
+        <CardList threads={threadList.filter((t) => t.category.includes(category))} onVoteUp={onVoteUpHandler} onVoteDown={onVoteDownHandler} />
 
         <button
           onClick={createDisccussHandler}

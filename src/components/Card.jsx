@@ -1,20 +1,12 @@
 import React from "react";
-import { FaUserCircle, FaRegThumbsUp, FaRegThumbsDown, FaRegCommentDots } from "react-icons/fa";
+import { FaUserCircle, FaRegThumbsUp, FaRegThumbsDown, FaRegCommentDots, FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 import timeAgo from "../utils/index";
 import { Link } from "react-router-dom";
 
-export default function Card({
-  id: threadId,
-  title,
-  body,
-  category,
-  createdAt,
-  owner,
-  upVotesBy,
-  downVotesBy,
-  totalComments,
-  authUser,
-}) {
+export default function Card({ id: threadId, title, body, category, createdAt, owner, upVotesBy, downVotesBy, totalComments, authUser, onVoteUp, onVoteDown }) {
+  let isVotedUp = upVotesBy.includes((userId) => userId === authUser.id); // true/false
+  let isVotedDown = downVotesBy.includes((userId) => userId === authUser.id); // true/false
+
   return (
     <div className="cardd w-full p-[15px] text-[0.85rem] font-normal cursor-default border-solid border-b-[1px]  border-[#c8d4de6b] transition ease duration-[200ms] bg-transparent hover:bg-[#15191e]">
       {/* header card */}
@@ -27,10 +19,7 @@ export default function Card({
       </header>
       {/* body card */}
       <main className="card__body py-[10px]">
-        <Link
-          to={`/threads/${threadId}`}
-          className="card__title text-[1.15em] font-[700] no-underline text-inherit"
-        >
+        <Link to={`/threads/${threadId}`} className="card__title text-[1.15em] font-[700] no-underline text-inherit">
           {title}
         </Link>
         <p className="card__desc pt-[10px] font-[0.95em]">{body}</p>
@@ -42,16 +31,12 @@ export default function Card({
       </main>
       {/* footer card */}
       <footer className="card__footer pt-[8px] pl-[2px] flex gap-[20px]">
-        <button className="flex items-center gap-[4px] text-inherit border-none bg-transparent cursor-pointer">
-          <i className="text-[1.3em] transition ease duration-[100ms]">
-            <FaRegThumbsUp />
-          </i>
+        <button onClick={() => onVoteUp(threadId)} className="flex items-center gap-[4px] text-inherit border-none bg-transparent cursor-pointer">
+          <i className="text-[1.3em] transition ease duration-[100ms]">{isVotedUp ? <FaThumbsUp /> : <FaRegThumbsUp />}</i>
           <span className="text-[1em]">{upVotesBy.length}</span>
         </button>
-        <button className="flex items-center gap-[4px] text-inherit border-none bg-transparent cursor-pointer">
-          <i className="text-[1.3em] transition ease duration-[100ms]">
-            <FaRegThumbsDown />
-          </i>
+        <button onClick={() => onVoteDown(threadId)} className="flex items-center gap-[4px] text-inherit border-none bg-transparent cursor-pointer">
+          <i className="text-[1.3em] transition ease duration-[100ms]">{isVotedDown ? <FaThumbsDown /> : <FaRegThumbsDown />}</i>
           <span>{downVotesBy.length}</span>
         </button>
         <button className="flex items-center gap-[4px] text-inherit border-none bg-transparent cursor-pointer">
