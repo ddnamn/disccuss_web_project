@@ -2,7 +2,8 @@ import { useEffect } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import Thread from '../components/Thread';
 
-import { threads } from '../utils/local-data'; // data-local (arrayOfObject)
+import { TbPencilPlus } from 'react-icons/tb';
+
 import {fetchThreads} from '../redux/reducer/threadsSlice'
 
 
@@ -47,9 +48,9 @@ export default function ThreadPage() {
         {/* <CardList threads={threads} /> */}
       </div>
 
-      {/* <div className='z-10 absolute bg-green-300 right-0' onClick={createDisccussHandler}>
-        ➕ create Disccuss 
-      </div> */}
+      <button className="add-button fixed bottom-[3rem] right-[3rem] flex justify-center items-center bg-transcript p-1 rounded-[30%] hover:scale-[1.1] duration-[0.2s] ease">
+        <TbPencilPlus className="text-[2.25rem] text-primary" id="pencil" />
+      </button>
     </>
   );
 }
