@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardList from "../components/CardList";
 import { TbPencilPlus, TbPlus } from "react-icons/tb";
@@ -13,6 +13,7 @@ export default function ThreadPage() {
   const users = useSelector((states) => states.users.entities) || [];
   const threads = useSelector((states) => states.threads.entities) || [];
   const categories = useSelector((state) => state.categories.entities) || [];
+  const [category, setCategory] = useState("");
   const threadList = threads.map((th) => {
     return {
       ...th,
@@ -34,7 +35,10 @@ export default function ThreadPage() {
     alert("open createDisccuss.page");
   };
 
-  const onCategoryHandler = () => {};
+  const onCategoryHandler = ({ target }) => {
+    // console.log(target.);
+    // setCategory(target.value);
+  };
 
   return (
     <>
@@ -56,7 +60,7 @@ export default function ThreadPage() {
           <h1 className="text-[1.7rem] font-bold mt-[20px]">Diskusi tersedia</h1>
         </header>
         {/* {LIST} */}
-        <CardList threads={threadList} />
+        <CardList threads={threadList.filter((t) => t.category.includes(category))} />
 
         <button
           onClick={createDisccussHandler}

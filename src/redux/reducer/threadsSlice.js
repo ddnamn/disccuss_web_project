@@ -5,6 +5,7 @@ const BASE_URL = "https://forum-api.dicoding.dev/v1";
 
 const initialState = {
   entities: [],
+  filteredEntities: [],
   loading: "idle",
   error: false,
 };
