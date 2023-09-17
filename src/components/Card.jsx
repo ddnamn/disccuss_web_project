@@ -20,7 +20,7 @@ export default function Card({
       {/* header card */}
       <header className="card__header flex justify-between items-center">
         <div className="card__profile flex items-center">
-          <FaUserCircle className="text-[2em] text-inherit" />
+          <img src={owner.avatar} alt={owner.name} width="27.5px" className="rounded-full" />
           <span className="card__owner-name text-[0.95em] pl-[10px] font-bold">{owner.name}</span>
         </div>
         <span className="card__created text-[0.9em]">{timeAgo(createdAt)}</span>

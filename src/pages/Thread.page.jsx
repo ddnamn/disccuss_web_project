@@ -18,7 +18,7 @@ export default function ThreadPage() {
     return {
       ...th,
       authUser,
-      owner: users.map((user) => user.id === th.ownerId),
+      owner: users.find((user) => user.id === th.ownerId) || {},
     };
   });
 
@@ -36,8 +36,7 @@ export default function ThreadPage() {
   };
 
   const onCategoryHandler = ({ target }) => {
-    // console.log(target.);
-    // setCategory(target.value);
+    setCategory(target.innerText);
   };
 
   return (

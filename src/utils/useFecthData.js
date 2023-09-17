@@ -24,6 +24,4 @@ export default function useFecthData() {
         break;
     }
   }, [dispatch, pathname]);
-
-  console.log("useFecth data berhasil dijalankan pathname ", pathname);
 }
