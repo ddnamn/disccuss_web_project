@@ -2,18 +2,21 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate,Link } from 'react-router-dom';
 import {fetchToken} from '../redux/reducer/loginSlice'
+import { fetchProfile } from '../redux/reducer/profileSlice';
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate(); // navigasi 
+  const token = useSelector(store=>store.token.token)
 
 
   const dispatch = useDispatch(); //redux for store data
 
   const submitHandler = (e) => {
-    e.preventDefault(),
+    e.preventDefault()
     dispatch(fetchToken(JSON.stringify( {email,password}))) 
+    dispatch(fetchProfile(token))
     navigate('/',{replace:true})
   };
  
