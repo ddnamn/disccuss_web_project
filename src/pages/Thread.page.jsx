@@ -1,56 +1,49 @@
-import { useEffect } from 'react';
-import { useDispatch,useSelector } from 'react-redux';
-import Thread from '../components/Thread';
-
-import { TbPencilPlus } from 'react-icons/tb';
-
-import {fetchThreads} from '../redux/reducer/threadsSlice'
-
-
+import React from 'react'
 
 export default function ThreadPage() {
-
-  // const createDisccussHandler = ()=>{
-  //   console.log('open createDisccuss')
-  // }
- 
-  const bunchOfThread = useSelector((store)=>store.threads.threadsData)
-
-  const dispatch = useDispatch()
-
-  useEffect(()=>{
-    dispatch(fetchThreads())
-  },[])
-
   return (
-    <>
-      <div className="threads__container w-2/3 m-auto bg-primary text-transcript py-[1rem]">
-        {/* HEADER */}
-        <header className="threads__header p-[10px] font-medium">
-          <h2 className="text-sm mb-[15px]">Kategori Popular</h2>
-          <div className="category-container flex gap-[15px] text-[0.9rem]">
-            <button className="bg-transparent border-solid border-transcript border-[1.5px] text-inherit py-[3px] px-[7px] rounded-[7px] cursor-pointer">
-              #cewek
-            </button>
-            <button className="bg-transparent border-solid border-transcript border-[1.5px] text-inherit py-[3px] px-[7px] rounded-[7px] cursor-pointer">
-              #ewe
-            </button>
-            <button className="bg-transparent border-solid border-transcript border-[1.5px] text-inherit  py-[3px] px-[7px] rounded-[7px] cursor-pointer">
-              #enaklah
-            </button>
-          </div>
-          <h1 className="text-[1.7rem] font-semibold mt-[20px]">Diskusi tersedia</h1>
-        </header>
-        {/* {LIST} */}
-        {
-          bunchOfThread.map(thread=><Thread key={thread.id} {...thread} />)
-        }
-        {/* <CardList threads={threads} /> */}
+    <section id='detail-page' className='bg-slate-400 border-2 border-white w-[50%] m-auto'>
+      <header id='thread-header' className='bg-slate-600 w-[60%]'>
+         <p id='thread-header_category'></p>
+      </header>
+      <div id='thread-content' className='bg-red-600 w-[60%]'>
+         <h2>Halo! Selamat datang dan silakan perkenalkan diri kamu</h2>
+         <div id='thread-content_body'></div>
       </div>
-
-      <button className="add-button fixed bottom-[3rem] right-[3rem] flex justify-center items-center bg-transcript p-1 rounded-[30%] hover:scale-[1.1] duration-[0.2s] ease">
-        <TbPencilPlus className="text-[2.25rem] text-primary" id="pencil" />
-      </button>
-    </>
-  );
+      <footer id='thread-footer'className='bg-green-600 w-[60%]'>
+         <button></button>
+         <button></button>
+         <div id='owner-info'></div>
+         <p></p>
+      </footer>
+      <div id='thread-comment'className='bg-blue-600 w-[60%]'>
+         <div id='thread-comment_input'>
+            <h3>Beri Komentar</h3>
+            <form id='comment-input'>
+               <div id='comment-input_field'></div>
+               <button>Kirim</button>
+            </form>
+         </div>
+         <div id='thread-comment_list'>
+            <h3></h3>
+            <div id='comments-list'>
+               <div id='comment-item'>
+                  <header id='comment-item_owner-header'>
+                     <div id='comment-item_owner-info'>
+                        <img src="" alt="" />
+                        <p></p>
+                     </div>
+                     <p id='posted-at'></p>
+                  </header>
+                  <p></p>
+                  <footer>
+                     <button id='comment-upvote_button'></button>
+                     <button id='comment-downvote_button'></button>
+                  </footer>
+               </div>
+            </div>
+         </div>
+      </div>
+    </section>
+  )
 }
