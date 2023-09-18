@@ -3,14 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import CardList from "../components/CardList";
 import { TbPencilPlus, TbPlus } from "react-icons/tb";
 
-import { fetchThreads, upVoteAsync } from "../redux/reducer/threadsSlice";
+import { fetchThreads, upVoteAsync, downVoteAsync } from "../redux/reducer/threadsSlice";
 import { fetchUsers } from "../redux/reducer/usersSlice";
 import { setCategories } from "../redux/reducer/categoriesSlice";
 
 export default function ThreadPage() {
   const dispatch = useDispatch();
-  const token = useSelector((states) => states.token.token) || null;
-  const authUser = useSelector((states) => states.register.data) || null;
+  const authUser = useSelector((states) => states.authUser || {});
   const users = useSelector((states) => states.users.entities) || [];
   const threads = useSelector((states) => states.threads.entities) || [];
   const categories = useSelector((state) => state.categories.entities) || [];
@@ -18,7 +17,7 @@ export default function ThreadPage() {
   const threadList = threads.map((th) => {
     return {
       ...th,
-      authUser,
+      profile: authUser.profile,
       owner: users.find((user) => user.id === th.ownerId) || {},
     };
   });
@@ -38,15 +37,11 @@ export default function ThreadPage() {
   };
 
   const onVoteUpHandler = (threadId) => {
-    // Dengan anggapan authUser & token initial-nya adalah null
-    if (authUser && token) return dispatch(upVoteAsync(threadId));
-
-    return alert("Need to Login !");
+    dispatch(upVoteAsync(threadId));
   };
 
   const onVoteDownHandler = (threadId) => {
-    if (!authUser) return alert("Need to Login !");
-    // dispatch(downVoteAsync(threadId))
+    dispatch(downVoteAsync(threadId));
   };
 
   return (
@@ -69,7 +64,11 @@ export default function ThreadPage() {
           <h1 className="text-[1.7rem] font-bold mt-[20px]">Diskusi tersedia</h1>
         </header>
         {/* {LIST} */}
-        <CardList threads={threadList.filter((t) => t.category.includes(category))} onVoteUp={onVoteUpHandler} onVoteDown={onVoteDownHandler} />
+        <CardList
+          threads={threadList.filter((t) => t.category.includes(category))}
+          onVoteUp={onVoteUpHandler}
+          onVoteDown={onVoteDownHandler}
+        />
 
         <button
           onClick={createDisccussHandler}

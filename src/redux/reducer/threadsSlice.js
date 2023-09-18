@@ -16,49 +16,85 @@ const fetchThreads = createAsyncThunk("threads/fetchThreads", async (_, thunkAPI
     const response = await axios.get(`${BASE_URL}/threads`);
     return response.data;
   } catch (error) {
-    error.response.data;
+    thunkAPI.rejectWithValue(error.message);
   }
 });
 
 // up Vote
-const upVoteAsync = createAsyncThunk("threads/upVoteAsync", async (threadId, { getState, dispatch }) => {
-  const { threads, token, register } = getState();
-  const authUserId = register.data.id; // something wrong
-  dispatch(log(authUserId));
-  const accessToken = token; //undefined
-  const thread = threads.entities.find((t) => t.id === threadId);
-  const isVotedDown = thread.downVotesBy.includes((id) => id === authUserId); // true/flase
-  const isVotedUp = thread.upVotesBy.includes((id) => id === authUserId); // true/flase
+const upVoteAsync = createAsyncThunk("threads/upVoteAsync", async (threadId, { getState, dispatch, rejectWithValue }) => {
+  const { threads, authUser } = getState();
+  const token = authUser.token;
+  const userId = authUser.profile.id;
 
-  // if (isVotedUp) {
-  //   try {
-  //     await axios.post(`${BASE_URL${thread}}/s/${thread}/neutral-vote`, null, {
-  //       headers: { Authorization: `Bearer ${token}` },
-  //     });
-  //     return { authUserId, threadId, isVotedDown, isVotedUp };
-  //   } catch (error) {
-  //     return error.response.data;
-  //   }
-  // } else {
-  // try {
-  //   await axios.post(`${BASE_URL}/threads/${thread}/up-vote`, null, {
-  //     headers: { Authorization: `Bearer ${token}` },
-  //   });
-  //   return { authUserId, threadId, isVotedDown, isVotedUp };
-  // } catch (error) {
-  //   return error.response.data;
-  // }
-  // }
+  if (!token) return rejectWithValue("Login Dulu Yuk 😁");
+
+  const thread = threads.entities.find((t) => t.id === threadId);
+  const isVotedDown = thread.downVotesBy.includes(userId);
+  const isVotedUp = thread.upVotesBy.includes(userId);
+
+  if (isVotedUp) {
+    try {
+      const response = await axios.post(`${BASE_URL}/threads/${threadId}/neutral-vote`, null, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return { message: response.data.message, userId, threadId, isVotedDown, isVotedUp };
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  } else {
+    try {
+      const response = await axios.post(`${BASE_URL}/threads/${threadId}/up-vote`, null, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return { message: response.data.message, userId, threadId, isVotedDown, isVotedUp };
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
 });
 
 // down Vote
+export const downVoteAsync = createAsyncThunk(
+  "threads/downVoteAsync",
+  async (threadId, { getState, dispatch, rejectWithValue }) => {
+    const { threads, authUser } = getState();
+    const token = authUser.token;
+    const userId = authUser.profile.id;
+
+    if (!token) return rejectWithValue("Login Dulu Yuk 😁");
+
+    const thread = threads.entities.find((t) => t.id === threadId);
+    const isVotedDown = thread.downVotesBy.includes(userId);
+    const isVotedUp = thread.upVotesBy.includes(userId);
+
+    if (isVotedDown) {
+      try {
+        const response = await axios.post(`${BASE_URL}/threads/${threadId}/neutral-vote`, null, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        return { message: response.data.message, userId, threadId, isVotedDown, isVotedUp };
+      } catch (error) {
+        return rejectWithValue(error.message);
+      }
+    } else {
+      try {
+        const response = await axios.post(`${BASE_URL}/threads/${threadId}/down-vote`, null, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        return { message: response.data.message, userId, threadId, isVotedDown, isVotedUp };
+      } catch (error) {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
 
 const threadSlice = createSlice({
   name: "threads",
   initialState,
   reducers: {
     log: (state, action) => {
-      console.log("=> ", action.payload);
+      console.log("userId => ", action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -74,28 +110,53 @@ const threadSlice = createSlice({
       })
       .addCase(fetchThreads.rejected, (state, action) => {
         state.loading = "rejected";
-        state.error = true;
-        alert(action.payload.data.message);
-      });
-    // UP_VOTE
-    // .addCase(upVoteAsync.fulfilled, (state, { payload: { authUserId, threadId, isVotedDown, isVotedUp } }) => {
-    //   const threadIndex = state.entities.findIndex((t) => t.id === threadId);
+        state.error = action.error;
+        alert(action.payload);
+      })
+      // UP_VOTE
+      .addCase(upVoteAsync.fulfilled, (state, { payload: { userId, threadId, isVotedDown, isVotedUp, message } }) => {
+        const threadIndex = state.entities.findIndex((t) => t.id === threadId);
 
-    //   if (isVotedDown) {
-    //     const userIdIndex = state.entities[threadIndex].downVotesBy.findIndex((id) => id === authUserId);
-    //     state.entities[threadIndex].downVotesBy.splice(userIdIndex, 1);
-    //     state.entities[threadIndex].upVotesBy.push(authUserId);
-    //   } else if (isVotedUp) {
-    //     const userIdIndex = state.entities[threadIndex].upVotesBy.findIndex((id) => id === authUserId);
-    //     state.entities[threadIndex].upVotesBy.splice(userIdIndex, 1);
-    //   } else {
-    //     state.entities[threadIndex].upVotesBy.push(authUserId);
-    //   }
-    // })
-    // .addCase(upVoteAsync.rejected, (state, action) => {
-    //   alert(action.payload.message);
-    // });
-    // DOWN VOTE
+        if (isVotedDown) {
+          // kondisi from unlike to like
+          const userIdIndex = state.entities[threadIndex].downVotesBy.findIndex((id) => id === userId);
+          state.entities[threadIndex].downVotesBy.splice(userIdIndex, 1);
+          state.entities[threadIndex].upVotesBy.push(userId);
+        } else if (isVotedUp) {
+          // kondisi from like to neutral
+          const userIdIndex = state.entities[threadIndex].upVotesBy.findIndex((id) => id === userId);
+          state.entities[threadIndex].upVotesBy.splice(userIdIndex, 1);
+        } else {
+          // kondisi pertama kali like
+          state.entities[threadIndex].upVotesBy.push(userId);
+        }
+        alert(message);
+      })
+      .addCase(upVoteAsync.rejected, (state, action) => {
+        alert(action.payload);
+      })
+      // DOWN VOTE
+      .addCase(downVoteAsync.fulfilled, (state, { payload: { userId, threadId, isVotedDown, isVotedUp, message } }) => {
+        const threadIndex = state.entities.findIndex((t) => t.id === threadId);
+
+        if (isVotedUp) {
+          // kondisi from like to unlike
+          const userIdIndex = state.entities[threadIndex].upVotesBy.findIndex((id) => id === userId);
+          state.entities[threadIndex].upVotesBy.splice(userIdIndex, 1);
+          state.entities[threadIndex].downVotesBy.push(userId);
+        } else if (isVotedDown) {
+          // kondisi from like to neutral
+          const userIdIndex = state.entities[threadIndex].downVotesBy.findIndex((id) => id === userId);
+          state.entities[threadIndex].downVotesBy.splice(userIdIndex, 1);
+        } else {
+          // kondisi pertama kali like
+          state.entities[threadIndex].downVotesBy.push(userId);
+        }
+        alert(message);
+      })
+      .addCase(downVoteAsync.rejected, (state, action) => {
+        alert(action.payload);
+      });
   },
 });
 

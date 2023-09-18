@@ -5,6 +5,7 @@ import categoriesReducer from "./reducer/categoriesSlice";
 import leaderboardsReducer from "./reducer/leaderboardsSlice";
 import loginReducer from "./reducer/loginSlice";
 import registerReducer from "../redux/reducer/registerSlice";
+import authUserReducer from "../redux/reducer/authUserSlice";
 
 const Store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const Store = configureStore({
     categories: categoriesReducer,
     token: loginReducer,
     register: registerReducer,
+    authUser: authUserReducer,
   },
 });
 
