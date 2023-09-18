@@ -36,7 +36,6 @@ export default function ThreadPage() {
   };
 
   const onCategoryHandler = ({ target }) => {
-    console.log(target.classList);
     setCategory(target.innerText);
   };
 
@@ -47,8 +46,6 @@ export default function ThreadPage() {
   const onVoteDownHandler = (threadId) => {
     dispatch(downVoteAsync(threadId));
   };
-
-  console.log(categories);
 
   return (
     <>
