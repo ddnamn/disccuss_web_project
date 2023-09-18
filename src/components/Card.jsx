@@ -1,5 +1,6 @@
 import React from "react";
 import { FaUserCircle, FaRegThumbsUp, FaRegThumbsDown, FaRegCommentDots, FaThumbsUp, FaThumbsDown } from "react-icons/fa";
+import parser from "html-react-parser";
 import timeAgo from "../utils/index";
 import { Link } from "react-router-dom";
 
@@ -35,7 +36,7 @@ export default function Card({
         <Link to={`/threads/${id}`} className="card__title text-[1.15em] font-[700] no-underline text-inherit">
           {title}
         </Link>
-        <p className="card__desc pt-[10px] font-[0.95em]">{body}</p>
+        <p className="card__desc pt-[10px] font-[0.95em]">{parser(body)}</p>
         <div className="card__category-container flex gap-[8px] mt-[20px] text-accent">
           <span className="bg-transcript text-primary font-[700] text-[0.75em] rounded-[3.5px] py-[2px] px-[5.5px] border-solid border-transcript ">
             {`# ${category}`}
