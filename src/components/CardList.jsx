@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import Card from './Card';
+import React, { useState, version } from "react";
+import Card from "./Card";
 
-export default function CardList({ threads }) {
+export default function CardList({ threads, onVoteUp, onVoteDown }) {
   return (
-    <div className="threads__list w-full flex flex-col justify-center items-center gap-[20px]">
+    <div className="threads__list">
       {threads.map((thread) => (
-        <Card key={thread.id} {...thread} />
+        <Card key={thread.id} {...thread} onVoteUp={onVoteUp} onVoteDown={onVoteDown} />
       ))}
     </div>
   );
