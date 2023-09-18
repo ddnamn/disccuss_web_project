@@ -25,14 +25,18 @@ export default function ThreadPage() {
   useEffect(() => {
     dispatch(fetchThreads());
     dispatch(fetchUsers());
-    dispatch(setCategories(threads));
   }, []);
+
+  useEffect(() => {
+    dispatch(setCategories(threads));
+  }, [threads]);
 
   const createDisccussHandler = () => {
     alert("open createDisccuss.page");
   };
 
   const onCategoryHandler = ({ target }) => {
+    console.log(target.classList);
     setCategory(target.innerText);
   };
 
@@ -43,6 +47,8 @@ export default function ThreadPage() {
   const onVoteDownHandler = (threadId) => {
     dispatch(downVoteAsync(threadId));
   };
+
+  console.log(categories);
 
   return (
     <>
