@@ -36,6 +36,12 @@ export default function ThreadPage() {
   };
 
   const onCategoryHandler = ({ target }) => {
+    console.log("clicked !");
+    Array.from(document.querySelectorAll(".category-container button")).forEach((el) => {
+      console.log(el);
+      el.className = el.className.replace("active-button", "");
+    });
+    target.className += " active-button";
     setCategory(target.innerText);
   };
 

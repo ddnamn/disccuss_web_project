@@ -23,3 +23,15 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.category-container button:hover,
+.category-container button.active-button {
+  transition: 0.2s ease;
+  font-weight: bold;
+  background-color: #afbfcb;
+  border-color: #afbfcb;
+  color: #1d232a;
+}
+
+/* accent: "#2d394b", */
+/* transcript: "#afbfcb", */
