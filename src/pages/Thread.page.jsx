@@ -36,13 +36,11 @@ export default function ThreadPage() {
   };
 
   const onCategoryHandler = ({ target }) => {
-    console.log("clicked !");
     Array.from(document.querySelectorAll(".category-container button")).forEach((el) => {
-      console.log(el);
       el.className = el.className.replace("active-button", "");
     });
     target.className += " active-button";
-    setCategory(target.innerText);
+    setCategory(target.value);
   };
 
   const onVoteUpHandler = (threadId) => {
@@ -63,10 +61,11 @@ export default function ThreadPage() {
             {categories.map((category) => (
               <button
                 key={category}
+                value={category}
                 onClick={onCategoryHandler}
                 className="bg-transparent border-solid border-transcript border-[1.35px] text-inherit py-[3px] px-[7px] rounded-[7px] cursor-pointer"
               >
-                {category}
+                #{category}
               </button>
             ))}
           </div>

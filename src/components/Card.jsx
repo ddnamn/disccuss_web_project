@@ -45,7 +45,7 @@ export default function Card({
         <div className="card__desc pt-[10px] font-[0.95em]">{parser(body, options)}</div>
         <div className="card__category-container flex gap-[8px] mt-[20px] text-accent">
           <span className="bg-transcript text-primary font-[700] text-[0.75em] rounded-[3.5px] py-[2px] px-[5.5px] border-solid border-transcript ">
-            {`# ${category}`}
+            {`#${category}`}
           </span>
         </div>
       </main>
@@ -55,14 +55,18 @@ export default function Card({
           onClick={() => onVoteUp(id)}
           className="flex items-center gap-[4px] text-inherit border-none bg-transparent cursor-pointer"
         >
-          <i className="text-[1.3em] transition ease duration-[100ms]">{isVotedUp ? <FaThumbsUp /> : <FaRegThumbsUp />}</i>
+          <i className="text-[1.3em] transition ease duration-[100ms]">
+            {isVotedUp ? <FaThumbsUp /> : <FaRegThumbsUp />}
+          </i>
           <span className="text-[1em]">{upVotesBy.length}</span>
         </button>
         <button
           onClick={() => onVoteDown(id)}
           className="flex items-center gap-[4px] text-inherit border-none bg-transparent cursor-pointer"
         >
-          <i className="text-[1.3em] transition ease duration-[100ms]">{isVotedDown ? <FaThumbsDown /> : <FaRegThumbsDown />}</i>
+          <i className="text-[1.3em] transition ease duration-[100ms]">
+            {isVotedDown ? <FaThumbsDown /> : <FaRegThumbsDown />}
+          </i>
           <span>
             <strong>{downVotesBy.length}</strong>
           </span>

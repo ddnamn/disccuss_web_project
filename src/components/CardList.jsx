@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, version } from "react";
 import Card from "./Card";
 
 export default function CardList({ threads, onVoteUp, onVoteDown }) {
