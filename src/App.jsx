@@ -4,7 +4,7 @@ import LeaderboardsPage from "./pages/Leaderboards.page"
 import ThreadListPage from "./pages/ThreadList.page"
 import Navbar from "./components/Navbar"
 import RegisterPage from "./pages/Register.page"
-
+import ProfilePage from './pages/Profile.page'
 
 function App() {
   return (
@@ -16,6 +16,7 @@ function App() {
         <Route path='leaderboards' element={<LeaderboardsPage/>}/>
         <Route path='login' element={< LoginPage/>}/>
         <Route path='register' element={< RegisterPage/>}/>
+        <Route path="profile" element={<ProfilePage/>}/>
       </Routes>
      </BrowserRouter>
     </>

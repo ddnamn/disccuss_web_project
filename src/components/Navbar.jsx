@@ -11,21 +11,33 @@ export default function Navbar() {
         <h1 className="text-xl">
           <Link to="/">let's Discuss</Link>
         </h1>
-        <nav className="navbar-end hidden lg:flex lg:justify-end">
+        <nav className="navbar-end hidden lg:flex lg:justify-end">  
           <ul className="menu menu-horizontal px-1 ">
             <li>
               <Link to="/">Threads</Link>
             </li>
             <li>
-              <Link to="/leaderboards">LeaderBoards</Link>
+              <Link to="leaderboards">LeaderBoards</Link>
             </li>
-            <li>
-              <Link to="/login">Login</Link>
+            {
+              isLogin?.length?  
+                <>
+                  <li>
+                    <Link to='login'>LogOut</Link>
+                  </li>
+                  <li>
+                    <Link to='profile'>Profile</Link>
+                  </li>
+                </>
+                : <li>
+              <Link to="login">LogIn</Link>
             </li>
+            }
+          
           </ul>
         </nav>
         {/* dropdown button */}
-        <details className="dropdown">
+        <details className="dropdown lg:hidden">
           <summary tabIndex={0} className="btn btn-ghost lg:hidden ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -55,10 +67,19 @@ export default function Navbar() {
 
 
             {
-              isLogin?.length?<li>
-                <Link to="/login">LogOut</Link>
-              </li>:<li>
-              <Link to="/login">LogIn</Link>
+            isLogin?.length? 
+            
+            <>
+            <li>
+              <Link to='login'>LogOut</Link>
+            </li>
+            <li>
+              <Link to='profile'>Profile</Link>
+            </li>
+          </>
+            
+            : <li>
+              <Link to="login">LogIn</Link>
             </li>
             }
             
