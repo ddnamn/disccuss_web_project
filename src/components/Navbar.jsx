@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 export default function Navbar() {
-  const isLogin = useSelector(store=>store.token.token)
+  const isLogin = useSelector(store=>store.login.token)
 
 
   return (
@@ -23,10 +23,10 @@ export default function Navbar() {
               isLogin?.length?  
                 <>
                   <li>
-                    <Link to='login'>LogOut</Link>
+                    <Link to='profile'>Profile</Link>
                   </li>
                   <li>
-                    <Link to='profile'>Profile</Link>
+                    <Link to='login'>LogOut</Link>
                   </li>
                 </>
                 : <li>
@@ -71,10 +71,10 @@ export default function Navbar() {
             
             <>
             <li>
-              <Link to='login'>LogOut</Link>
+              <Link to='profile'>Profile</Link>
             </li>
             <li>
-              <Link to='profile'>Profile</Link>
+              <Link to='login'>LogOut</Link>
             </li>
           </>
             

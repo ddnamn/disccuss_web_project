@@ -3,37 +3,63 @@ import axios from "axios";
 
 const initialState = {
   loading: false,
-  token: [],
   error: null,
+  token: [],
+  profileData: [],
 };
-
-export const fetchToken = createAsyncThunk("login/fetchToken", (data) =>
+//FETCH PROFILE DATA
+export const fetchProfile = createAsyncThunk("profile/fetchProfile", (data) =>
   axios
-    .post("https://forum-api.dicoding.dev/v1/login", data, {
-      headers: { "Content-Type": "application/json" },
+    .get("https://forum-api.dicoding.dev/v1/users/me", {
+      headers: { Authorization: `Bearer ${data}` },
     })
-    .then((res) => res.data.data.token)
+    .then((res) => res.data.data.user)
 );
+
+//FETCH TOKEN
+export const fetchToken = createAsyncThunk(
+  "login/fetchToken",
+  async (data, thunkAPI) => {
+    try {
+      const response = await axios.post(
+        "https://forum-api.dicoding.dev/v1/login",
+        data,
+        { headers: { "Content-Type": "application/json" } }
+      );
+      thunkAPI.dispatch(fetchProfile(response.data.data.token));
+      // console.log(response.data.data.token);
+      return response.data.data.token;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+// res.data.data.token
 
 const loginSlice = createSlice({
   name: "login",
   initialState,
   extraReducers(builder) {
-    builder.addCase(fetchToken.pending, (state) => {
-      state.loading = true;
-      state.token = null;
-      state.error = null;
-    }),
-      builder.addCase(fetchToken.fulfilled, (state, { payload }) => {
+    builder
+      .addCase(fetchToken.pending, (state) => {
+        state.loading = true;
+        state.token = null;
+        state.error = null;
+      })
+      .addCase(fetchToken.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.token = payload;
         state.error = null;
         alert("login success");
-      }),
-      builder.addCase(fetchToken.rejected, (state, action) => {
+      })
+      .addCase(fetchToken.rejected, (state, action) => {
         state.loading = false;
         state.token = null;
         state.error = action.error.message;
+      })
+      .addCase(fetchProfile.fulfilled, (state, { payload }) => {
+        state.profileData = payload;
       });
   },
 });

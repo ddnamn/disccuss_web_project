@@ -10,9 +10,7 @@ import {fetchThreads} from '../redux/reducer/threadsSlice'
 
 export default function ThreadListPage() {
 
-  // const createDisccussHandler = ()=>{
-  //   console.log('open createDisccuss')
-  // }
+  
  
   const bunchOfThread = useSelector((store)=>store.threads.threadsData)
 
@@ -30,13 +28,13 @@ export default function ThreadListPage() {
           <h2 className="text-sm mb-[15px]">Kategori Popular</h2>
           <div className="category-container flex gap-[15px] text-[0.9rem]">
             <button className="bg-transparent border-solid border-transcript border-[1.5px] text-inherit py-[3px] px-[7px] rounded-[7px] cursor-pointer">
-              #cewek
+              #--
             </button>
             <button className="bg-transparent border-solid border-transcript border-[1.5px] text-inherit py-[3px] px-[7px] rounded-[7px] cursor-pointer">
-              #ewe
+              #--
             </button>
             <button className="bg-transparent border-solid border-transcript border-[1.5px] text-inherit  py-[3px] px-[7px] rounded-[7px] cursor-pointer">
-              #enaklah
+              #--
             </button>
           </div>
           <h1 className="text-[1.7rem] font-semibold mt-[20px]">Diskusi tersedia</h1>
@@ -48,7 +46,7 @@ export default function ThreadListPage() {
         {/* <CardList threads={threads} /> */}
       </div>
 
-      <button className="add-button fixed bottom-[3rem] right-[3rem] flex justify-center items-center bg-transcript p-1 rounded-[30%] hover:scale-[1.1] duration-[0.2s] ease">
+      <button className="add-button fixed bottom-[3rem] right-[3rem] flex justify-center items-center bg-transcript text-black p-1 rounded-[30%] hover:scale-[1.1] duration-[0.2s] ease"> 
         <TbPencilPlus className="text-[2.25rem] text-primary" id="pencil" />
       </button>
     </>
