@@ -1,16 +1,13 @@
 import { useEffect } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import Thread from '../components/Thread';
-
 import { TbPencilPlus } from 'react-icons/tb';
-
 import {fetchThreads} from '../redux/reducer/threadsSlice'
 
 
 
-export default function ThreadListPage() {
 
-  
+export default function ThreadListPage() {
  
   const bunchOfThread = useSelector((store)=>store.threads.threadsData)
 
@@ -40,10 +37,10 @@ export default function ThreadListPage() {
           <h1 className="text-[1.7rem] font-semibold mt-[20px]">Diskusi tersedia</h1>
         </header>
         {/* {LIST} */}
+
         {
           bunchOfThread.map(thread=><Thread key={thread.id} {...thread} />)
         }
-        {/* <CardList threads={threads} /> */}
       </div>
 
       <button className="add-button fixed bottom-[3rem] right-[3rem] flex justify-center items-center bg-transcript text-black p-1 rounded-[30%] hover:scale-[1.1] duration-[0.2s] ease"> 

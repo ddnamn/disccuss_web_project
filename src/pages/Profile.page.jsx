@@ -1,10 +1,17 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-// import { fetchProfile } from '../redux/reducer/profileSlice'
+import { useSelector } from 'react-redux'
+// import {useNavigate} from 'react-router-dom'
 
-export default function ProfilePage() {
-  // const token = useSelector(store=>store.token.token)
+
+export default function ProfilePage() {  
   const profileInfo = useSelector(store=>store.login.profileData)
+  // const token = useSelector(store=>store.login.token )
+
+  // const navigate = useNavigate()
+  // if(!token){
+  //   return navigate('login')
+  // }
+
+
   return (
     <div className='m-auto h-[calc(100vh-96px)] flex flex-col justify-center items-center gap-2'>
 

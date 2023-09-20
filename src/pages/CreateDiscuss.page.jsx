@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function CreateDisccussPage() {
+export default function CreateDiscussPage() {
   return (
     <>
       <button className="btn" onClick={()=>window.my_modal_3.showModal()}>open modal</button>

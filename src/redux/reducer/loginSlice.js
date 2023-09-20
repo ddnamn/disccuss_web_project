@@ -27,7 +27,6 @@ export const fetchToken = createAsyncThunk(
         { headers: { "Content-Type": "application/json" } }
       );
       thunkAPI.dispatch(fetchProfile(response.data.data.token));
-      // console.log(response.data.data.token);
       return response.data.data.token;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -40,6 +39,12 @@ export const fetchToken = createAsyncThunk(
 const loginSlice = createSlice({
   name: "login",
   initialState,
+  reducers: {
+    logOut: (state) => {
+      state.token = [];
+      state.profileData = [];
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchToken.pending, (state) => {
@@ -65,3 +70,4 @@ const loginSlice = createSlice({
 });
 
 export default loginSlice.reducer;
+export const { logOut } = loginSlice.actions;

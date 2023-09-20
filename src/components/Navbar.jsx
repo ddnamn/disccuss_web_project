@@ -1,8 +1,12 @@
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { logOut } from '../redux/reducer/loginSlice';
+
+
 
 export default function Navbar() {
   const isLogin = useSelector(store=>store.login.token)
+  const dispatch = useDispatch()
 
 
   return (
@@ -26,7 +30,7 @@ export default function Navbar() {
                     <Link to='profile'>Profile</Link>
                   </li>
                   <li>
-                    <Link to='login'>LogOut</Link>
+                    <Link to='login' onClick={()=>{dispatch(logOut())}}>LogOut</Link>
                   </li>
                 </>
                 : <li>
@@ -74,7 +78,7 @@ export default function Navbar() {
               <Link to='profile'>Profile</Link>
             </li>
             <li>
-              <Link to='login'>LogOut</Link>
+              <Link to='login'  onClick={()=>{dispatch(logOut())}}>LogOut</Link>
             </li>
           </>
             

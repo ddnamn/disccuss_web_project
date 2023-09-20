@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate,Link,useLocation } from 'react-router-dom';
 import {fetchToken} from '../redux/reducer/loginSlice'
 
 export default function LoginPage() {
@@ -8,7 +8,11 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate(); // navigate config 
 
+  const location = useLocation() 
 
+  console.log(location)
+
+  
   const dispatch = useDispatch(); //dispatch redux for store data
 
   const submitHandler = (e) => {
@@ -25,6 +29,7 @@ export default function LoginPage() {
           <h1 className=" text-center">✏️ LOGIN</h1>
           <form className="flex  flex-col  items-center h-52 justify-evenly " onSubmit={submitHandler}>
             <input
+              // value={email}
               type="email"
               placeholder="Type Email here"
               className="input input-bordered w-full max-w-xs"
@@ -32,6 +37,7 @@ export default function LoginPage() {
               onChange={e=>setEmail(e.target.value)}
             />
             <input
+              // value={password}
               type="password"
               placeholder="Password"
               className="input input-bordered w-full max-w-xs"
