@@ -15,21 +15,21 @@ export default function RankingBoard() {
   },[]) 
 
   return (
-   <ul className="flex justify-between flex-col flex-1 ">  
+   <ul>  
       {
       listOfLeaderboard.map(ranking=>
-        <li  className="flex justify-around items-center p-2  pl-64 m-1 flex-1" key={ranking.user.id}>
-            <div className="flex items-center flex-1 ">
-                  <div className="avatar mr-2">
+        <li  className="flex items-center m-4  pl-40" key={ranking.user.id}>
+            <div className="flex items-center flex-1">
+                  <div className="avatar mr-2 ">
                      <div className="w-20 rounded-full">
                         <img src={ranking.user.avatar} alt="profileImage" />
                      </div>
                   </div>
                   
-                  <p className="text-2xl font-bold  ml-3">{ranking.user.name}</p>
+                  <p className="text-lg font-bold  ml-3">{ranking.user.name}</p>
             </div>
 
-            <h3 className="text-2xl font-bold flex-1 text-center w-4 flex-1">{ranking.score} </h3>
+            <h3 className="text-2xl font-bold pr-3 flex flex-1 justify-center">{ranking.score} </h3>
          </li>
       )
       }
