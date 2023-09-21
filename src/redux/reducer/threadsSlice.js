@@ -16,7 +16,8 @@ const fetchThreads = createAsyncThunk("threads/fetchThreads", async (_, thunkAPI
     const response = await axios.get(`${BASE_URL}/threads`);
     return response.data;
   } catch (error) {
-    thunkAPI.rejectWithValue(error.message);
+    if (error.response.data) return error.response.data;
+    return thunkAPI.rejectWithValue(error.message);
   }
 });
 
@@ -74,6 +75,7 @@ export const downVoteAsync = createAsyncThunk(
         });
         return { message: response.data.message, userId, threadId, isVotedDown, isVotedUp };
       } catch (error) {
+        if (error.response.data) return error.response.data;
         return rejectWithValue(error.message);
       }
     } else {
@@ -83,18 +85,38 @@ export const downVoteAsync = createAsyncThunk(
         });
         return { message: response.data.message, userId, threadId, isVotedDown, isVotedUp };
       } catch (error) {
+        if (error.response.data) return error.response.data;
         return rejectWithValue(error.message);
       }
     }
   }
 );
 
+export const addThread = createAsyncThunk("threads/addThread", async (data, { dispatch, getState, rejectWithValue }) => {
+  try {
+    const {
+      authUser: { token },
+    } = getState();
+
+    if (token === null) return rejectWithValue("Login Dulu Ya 🥰");
+    // const response = await axios.post(`${BASE_URL}/threads`, JSON.stringify(data), {
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    // });
+    // return response.data;
+  } catch (error) {
+    // if (error.response.data) return error.response.data;
+    // return rejectWithValue(error.message);
+  }
+});
+
 const threadSlice = createSlice({
   name: "threads",
   initialState,
   reducers: {
     log: (state, action) => {
-      console.log("userId => ", action.payload);
+      console.log("ouput => ", action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -155,6 +177,14 @@ const threadSlice = createSlice({
         alert(message);
       })
       .addCase(downVoteAsync.rejected, (state, action) => {
+        alert(action.payload);
+      })
+      .addCase(addThread.fulfilled, (state, action) => {
+        const thread = action.payload.data.thread;
+        if (Object.keys(thread).length !== 0) state.entities.push(user);
+        alert(action.payload.message);
+      })
+      .addCase(addThread.rejected, (state, action) => {
         alert(action.payload);
       });
   },

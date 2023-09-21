@@ -6,6 +6,8 @@ import { TbPencilPlus, TbPlus } from "react-icons/tb";
 import { fetchThreads, upVoteAsync, downVoteAsync } from "../redux/reducer/threadsSlice";
 import { fetchUsers } from "../redux/reducer/usersSlice";
 import { setCategories } from "../redux/reducer/categoriesSlice";
+import NewThreadForm from "../components/NewThreadForm";
+import { RiCloseFill, RiCheckFill } from "react-icons/ri";
 
 export default function ThreadPage() {
   const dispatch = useDispatch();
@@ -31,10 +33,6 @@ export default function ThreadPage() {
     dispatch(setCategories(threads));
   }, [threads]);
 
-  const createDisccussHandler = () => {
-    alert("open createDisccuss.page");
-  };
-
   const onCategoryHandler = ({ target }) => {
     Array.from(document.querySelectorAll(".category-container button")).forEach((el) => {
       el.className = el.className.replace("active-button", "");
@@ -49,6 +47,18 @@ export default function ThreadPage() {
 
   const onVoteDownHandler = (threadId) => {
     dispatch(downVoteAsync(threadId));
+  };
+
+  const onCreateHandler = () => {
+    const modal = document.querySelector("#modal");
+    modal.className = modal.className.replace("invisible opacity-0", "visible opacity-100");
+  };
+
+  console.log("renderd??");
+
+  const onCloseHandler = () => {
+    const modal = document.querySelector("#modal");
+    modal.className = modal.className.replace("visible opacity-100", "invisible opacity-0");
   };
 
   return (
@@ -79,12 +89,13 @@ export default function ThreadPage() {
         />
 
         <button
-          onClick={createDisccussHandler}
+          onClick={onCreateHandler}
           className="add-button fixed bottom-[3rem] right-[3rem] flex justify-center items-center bg-transcript p-1 rounded-[30%] hover:scale-[1.1] duration-[0.2s] ease"
         >
           <TbPencilPlus className="text-[2.25rem] text-accent" id="pencil" />
         </button>
       </div>
+      <NewThreadForm onClose={onCloseHandler} />
     </>
   );
 }
