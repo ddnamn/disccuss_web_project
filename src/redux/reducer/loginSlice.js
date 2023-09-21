@@ -4,8 +4,8 @@ import axios from "axios";
 const initialState = {
   loading: false,
   error: null,
-  token: [],
-  profileData: [],
+  token: {},
+  profileData: {},
 };
 //FETCH PROFILE DATA
 export const fetchProfile = createAsyncThunk("profile/fetchProfile", (data) =>
@@ -23,7 +23,7 @@ export const fetchToken = createAsyncThunk(
     try {
       const response = await axios.post(
         "https://forum-api.dicoding.dev/v1/login",
-        data,
+        JSON.stringify(data),
         { headers: { "Content-Type": "application/json" } }
       );
       thunkAPI.dispatch(fetchProfile(response.data.data.token));
@@ -41,8 +41,8 @@ const loginSlice = createSlice({
   initialState,
   reducers: {
     logOut: (state) => {
-      state.token = [];
-      state.profileData = [];
+      state.token = {};
+      state.profileData = {};
     },
   },
   extraReducers(builder) {

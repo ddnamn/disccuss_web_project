@@ -1,23 +1,18 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate,Link,useLocation } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import {fetchToken} from '../redux/reducer/loginSlice'
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate(); // navigate config 
-
-  const location = useLocation() 
-
-  console.log(location)
-
   
   const dispatch = useDispatch(); //dispatch redux for store data
 
   const submitHandler = (e) => {
     e.preventDefault()
-    dispatch(fetchToken(JSON.stringify( {email,password}))) 
+    dispatch(fetchToken({email,password})) 
     navigate('/',{replace:true})
   };
  
@@ -50,7 +45,6 @@ export default function LoginPage() {
             </button>
   
           </form>
-
 
             <p className="items-end text-center">
               Belum punya akun?{' '}

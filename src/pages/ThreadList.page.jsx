@@ -24,15 +24,33 @@ export default function ThreadListPage() {
         <header className="threads__header p-[10px] font-medium">
           <h2 className="text-sm mb-[15px]">Kategori Popular</h2>
           <div className="category-container flex gap-[15px] text-[0.9rem]">
-            <button className="bg-transparent border-solid border-transcript border-[1.5px] text-inherit py-[3px] px-[7px] rounded-[7px] cursor-pointer">
-              #--
-            </button>
-            <button className="bg-transparent border-solid border-transcript border-[1.5px] text-inherit py-[3px] px-[7px] rounded-[7px] cursor-pointer">
-              #--
-            </button>
-            <button className="bg-transparent border-solid border-transcript border-[1.5px] text-inherit  py-[3px] px-[7px] rounded-[7px] cursor-pointer">
-              #--
-            </button>
+            {
+              
+              // bunchOfThread.forEach((thread) => {
+              //   if (!uniqueCategory.has(thread.category)) {
+              //     uniqueCategory.add(thread.category);
+              //     return 
+              //       <button className="bg-transparent border-solid border-transcript border-[1.5px] text-inherit py-[3px] px-[7px] rounded-[7px] cursor-pointer">
+              //     #{thread.category}
+              //   </button>
+                  
+              //   }
+              // })
+
+              // bunchOfThread.forEach((thread)=>
+              //   <button className="bg-transparent border-solid border-transcript border-[1.5px] text-inherit py-[3px] px-[7px] rounded-[7px] cursor-pointer" key={thread.id}>{thread.category}</button>
+              // )
+              bunchOfThread.map((thread) => (
+                
+                <button
+                  key={thread.id}
+                  className="bg-transparent border-solid border-transcript border-[1.5px] text-inherit py-[3px] px-[7px] rounded-[7px] cursor-pointer"
+                >
+                  #{thread.category}
+                </button>
+              ))
+            }
+            
           </div>
           <h1 className="text-[1.7rem] font-semibold mt-[20px]">Diskusi tersedia</h1>
         </header>
