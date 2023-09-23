@@ -5,7 +5,7 @@ import ThreadListPage from "./pages/ThreadList.page"
 import Navbar from "./components/Navbar"
 import RegisterPage from "./pages/Register.page"
 import ProfilePage from './pages/Profile.page'
-import CreateDiscussPage from "./pages/CreateDiscuss.page"
+// import NewThreadForm from "./pages/NewThreadForm.page"
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         <Route path='login' element={< LoginPage/>}/>
         <Route path='register' element={< RegisterPage/>}/>
         <Route path="profile" element={<ProfilePage/>}/>
-        <Route path='discuss' element={<CreateDiscussPage/>}/>
+        {/* <Route path='createThread' element={<NewThreadForm/>}/> */}
       </Routes>
      </BrowserRouter>
     </>

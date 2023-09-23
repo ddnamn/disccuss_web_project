@@ -3,6 +3,7 @@ import { useDispatch,useSelector } from 'react-redux';
 import Thread from '../components/Thread';
 import { TbPencilPlus } from 'react-icons/tb';
 import {fetchThreads} from '../redux/reducer/threadsSlice'
+import NewThreadForm from './NewThreadForm.page';
 
 
 
@@ -17,6 +18,16 @@ export default function ThreadListPage() {
     dispatch(fetchThreads())
   },[])
 
+  const openThreadFormHandler = () => {
+    const modal = document.querySelector("#modal");
+    modal.className = modal.className.replace("invisible opacity-0", "visible opacity-100");
+  };
+
+  const closeThreadFormHandler = () => {
+    const modal = document.querySelector("#modal");
+    modal.className = modal.className.replace("visible opacity-100", "invisible opacity-0");
+  };
+
   return (
     <>
       <div className="threads__container w-2/3 m-auto bg-primary text-transcript py-[1rem]">
@@ -25,21 +36,6 @@ export default function ThreadListPage() {
           <h2 className="text-sm mb-[15px]">Kategori Popular</h2>
           <div className="category-container flex gap-[15px] text-[0.9rem]">
             {
-              
-              // bunchOfThread.forEach((thread) => {
-              //   if (!uniqueCategory.has(thread.category)) {
-              //     uniqueCategory.add(thread.category);
-              //     return 
-              //       <button className="bg-transparent border-solid border-transcript border-[1.5px] text-inherit py-[3px] px-[7px] rounded-[7px] cursor-pointer">
-              //     #{thread.category}
-              //   </button>
-                  
-              //   }
-              // })
-
-              // bunchOfThread.forEach((thread)=>
-              //   <button className="bg-transparent border-solid border-transcript border-[1.5px] text-inherit py-[3px] px-[7px] rounded-[7px] cursor-pointer" key={thread.id}>{thread.category}</button>
-              // )
               bunchOfThread.map((thread) => (
                 
                 <button
@@ -61,9 +57,14 @@ export default function ThreadListPage() {
         }
       </div>
 
-      <button className="add-button fixed bottom-[3rem] right-[3rem] flex justify-center items-center bg-transcript text-black p-1 rounded-[30%] hover:scale-[1.1] duration-[0.2s] ease"> 
-        <TbPencilPlus className="text-[2.25rem] text-primary" id="pencil" />
+      <button
+          onClick={openThreadFormHandler}
+          className="add-button fixed bottom-[3rem] right-[3rem] flex justify-center items-center bg-transcript p-1 rounded-[30%] hover:scale-[1.1] duration-[0.2s] ease"
+        >
+          <TbPencilPlus className="text-[2.25rem] text-accent" id="pencil" />
       </button>
+
+      <NewThreadForm onClose={closeThreadFormHandler}/>
     </>
   );
 }
