@@ -19,7 +19,7 @@ export default function RankingBoard() {
       {
       listOfLeaderboard.map(ranking=>
         <li  className="flex items-center m-4  pl-40" key={ranking.user.id}>
-            <div className="flex items-center flex-1">
+            <div className="flex items-center flex-1 pl-9">
                   <div className="avatar mr-2 ">
                      <div className="w-20 rounded-full">
                         <img src={ranking.user.avatar} alt="profileImage" />

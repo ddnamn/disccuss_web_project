@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ThreadPage() {
+export default function DetailThreadPage() {
   return (
     <section id='detail-page' className='bg-slate-400 border-2 border-white w-[50%] m-auto'>
       <header id='thread-header' className='bg-slate-600 w-[60%]'>
