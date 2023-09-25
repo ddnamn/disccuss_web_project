@@ -11,7 +11,8 @@ export default function NewThreadForm({ onClose }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const onSubmitHandler = () => {
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
     dispatch(addThread({ title, body, category }));
   };
 

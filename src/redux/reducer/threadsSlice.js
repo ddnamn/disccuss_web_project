@@ -98,7 +98,6 @@ export const downVoteAsync = createAsyncThunk(
 export const addThread = createAsyncThunk(
   "threads/addThread",
   async (data, { dispatch, getState, rejectWithValue }) => {
-    dispatch(log(data));
     try {
       const {
         authUser: { token },
@@ -114,8 +113,8 @@ export const addThread = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      if (error.response.data) return error.response.data;
-      return rejectWithValue(error.message);
+      if (error.hasOwnProperty("response")) return error.response.data;
+      return rejectWithValue(error);
     }
   }
 );
@@ -196,16 +195,13 @@ const threadSlice = createSlice({
       })
       // ADD THREAD
       .addCase(addThread.fulfilled, (state, action) => {
-        // const thread = action.payload.data.thread;
-        // if (Object.keys(thread).length !== 0) state.entities.push(user);
-        // alert(action.payload.message);
+        if (action.payload.data.hasOwnProperty("thread")) state.entities.push(action.payload.data.thread);
+        alert(action.payload.message);
         console.log("fullfilled scope");
         console.log(action.payload.message);
       })
       .addCase(addThread.rejected, (state, action) => {
-        // alert(action.payload);
-        console.log("rejected scope");
-        console.log(action.payload);
+        alert(action.payload.message);
       });
   },
 });
