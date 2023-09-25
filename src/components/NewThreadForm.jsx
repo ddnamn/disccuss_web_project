@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import { RiCloseFill, RiCheckFill } from "react-icons/ri";
 import { addThread } from "../redux/reducer/threadsSlice";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 
 export default function NewThreadForm({ onClose }) {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [category, setCategory] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
+  const onSubmitHandler = () => {
     dispatch(addThread({ title, body, category }));
   };
 

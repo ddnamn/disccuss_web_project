@@ -50,11 +50,12 @@ export default function ThreadPage() {
   };
 
   const onCreateHandler = () => {
+    if (Object.keys(authUser.profile).length === 0 && authUser.token === null) {
+      return alert("Login Dulu Ngab 🫡");
+    }
     const modal = document.querySelector("#modal");
     modal.className = modal.className.replace("invisible opacity-0", "visible opacity-100");
   };
-
-  console.log("renderd??");
 
   const onCloseHandler = () => {
     const modal = document.querySelector("#modal");
