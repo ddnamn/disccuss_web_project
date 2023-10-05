@@ -7,7 +7,6 @@ import { fetchThreads, upVoteAsync, downVoteAsync } from "../redux/reducer/threa
 import { fetchUsers } from "../redux/reducer/usersSlice";
 import { setCategories } from "../redux/reducer/categoriesSlice";
 import NewThreadForm from "../components/NewThreadForm";
-import { RiCloseFill, RiCheckFill } from "react-icons/ri";
 
 export default function ThreadPage() {
   const dispatch = useDispatch();
@@ -54,12 +53,18 @@ export default function ThreadPage() {
       return alert("Login Dulu Ngab 🫡");
     }
     const modal = document.querySelector("#modal");
-    modal.className = modal.className.replace("invisible opacity-0", "visible opacity-100");
+    modal.className = modal.className.replace(
+      "invisible opacity-0",
+      "visible opacity-100"
+    );
   };
 
   const onCloseHandler = () => {
     const modal = document.querySelector("#modal");
-    modal.className = modal.className.replace("visible opacity-100", "invisible opacity-0");
+    modal.className = modal.className.replace(
+      "visible opacity-100",
+      "invisible opacity-0"
+    );
   };
 
   return (

@@ -4,6 +4,7 @@ import LeaderboardsPage from "./pages/Leaderboards.page";
 import ThreadPage from "./pages/Thread.page";
 import Navbar from "./components/Navbar";
 import RegisterPage from "./pages/Register.page";
+import DetailThreadPage from "./pages/DetailThread.page";
 
 function App() {
   return (
@@ -11,11 +12,11 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/" element={<ThreadPage />} />
+          <Route path="/*" element={<ThreadPage />} />
           <Route path="register" element={<RegisterPage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="leaderboards" element={<LeaderboardsPage />} />
-          <Route path="thread/:id" element={null}></Route>
+          <Route path="threads/:id" element={<DetailThreadPage />}></Route>
         </Routes>
       </BrowserRouter>
     </>

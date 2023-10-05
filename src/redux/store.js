@@ -6,6 +6,7 @@ import leaderboardsReducer from "./reducer/leaderboardsSlice";
 import loginReducer from "./reducer/loginSlice";
 import registerReducer from "../redux/reducer/registerSlice";
 import authUserReducer from "../redux/reducer/authUserSlice";
+import detailThreadReducer from "./reducer/detailThreadSlice";
 
 const Store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const Store = configureStore({
     token: loginReducer,
     register: registerReducer,
     authUser: authUserReducer,
+    detailThread: detailThreadReducer,
   },
 });
 
