@@ -1,16 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const BASE_URL = "https://forum-api.dicoding.dev/v1";
+
 const initialState = {
   loading: false,
   error: null,
   token: {},
   profileData: {},
 };
+
 //FETCH PROFILE DATA
 export const fetchProfile = createAsyncThunk("profile/fetchProfile", (data) =>
   axios
-    .get("https://forum-api.dicoding.dev/v1/users/me", {
+    .get(`${BASE_URL}/users/me`, {
       headers: { Authorization: `Bearer ${data}` },
     })
     .then((res) => res.data.data.user)

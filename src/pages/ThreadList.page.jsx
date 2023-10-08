@@ -11,6 +11,7 @@ import NewThreadForm from './NewThreadForm.page';
 export default function ThreadListPage() {
  
   const bunchOfThread = useSelector((store)=>store.threads.threadsData)
+  const isLogin = useSelector((store)=>store.login.profileData.id)
 
   const dispatch = useDispatch()
 
@@ -19,8 +20,12 @@ export default function ThreadListPage() {
   },[])
 
   const openThreadFormHandler = () => {
+    if(isLogin) {
     const modal = document.querySelector("#modal");
     modal.className = modal.className.replace("invisible opacity-0", "visible opacity-100");
+    }else{
+      alert("make sure you have been login ‼️")
+    }
   };
 
   const closeThreadFormHandler = () => {

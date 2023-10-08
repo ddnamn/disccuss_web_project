@@ -1,17 +1,26 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const BASE_URL = "https://forum-api.dicoding.dev/v1";
+
 const initialState = {
   threadsData: [],
   category: [],
 };
-
+// FETCH THREADS LIST
 export const fetchThreads = createAsyncThunk("threads/fetchThreads", () =>
   axios
-    .get("https://forum-api.dicoding.dev/v1/threads")
+    .get(`${BASE_URL}/threads`)
     .then((response) => response.data.data.threads)
 );
+// POST THREAD
+export const postThreads = createAsyncThunk("threads/postThreads", (data) => {
+  axios.post(`${BASE_URL}/threads`, data, {
+    headers: { Authorization: `Bearer ${data}` },
+  });
+});
 
+//configure to fetchThreads data
 const threadSlice = createSlice({
   name: "threads",
   initialState,

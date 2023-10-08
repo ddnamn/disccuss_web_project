@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const BASE_URL = "https://forum-api.dicoding.dev/v1";
+
 const initialState = {
   status: "",
   message: "",
@@ -11,7 +13,7 @@ export const fetchRegisterData = createAsyncThunk(
   "register/fetchRegisterData",
   (data) =>
     axios
-      .post("https://forum-api.dicoding.dev/v1/register", data, {
+      .post(`${BASE_URL}/register`, data, {
         headers: { "Content-Type": "application/json" },
       })
       .then((res) => res.data)

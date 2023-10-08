@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const BASE_URL = "https://forum-api.dicoding.dev/v1";
+
 const initialState = {
   leaderboardsData: [],
 };
@@ -9,7 +11,7 @@ export const fetchLearderboards = createAsyncThunk(
   "leaderboards/fetchLeaderboards",
   () =>
     axios
-      .get("https://forum-api.dicoding.dev/v1/leaderboards")
+      .get(`${BASE_URL}/leaderboards`)
       .then((response) => response.data.data.leaderboards)
 );
 
